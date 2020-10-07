@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Lecture 3</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+					<div class="container">
+						<div class="row" >
+							<h1 class="col-12">Git</h1>
+							<!-- <img class="row col-4 col-md-4" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSd61z7haNjT5zS0zbGl4esusrra0k_6mfLmA&usqp=CAU" alt="" srcset=""> -->
+						</div>
+					</div>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row" >
+                                <h2 class="col-12">Git is a </h2>
+                                <h3 class="col-12 bg-success">Version Control tool <span class="text-danger">(SCM)</span></h3>
+                                <h3 class="col-12 bg-success">Source Control Management Tool <span class="text-danger">(SCM)</span></h3>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row" >
+                                <h2 class="col-12">What is</h2>
+                                <h3 class="col-12">a Version Control Tool?</h3>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row" >
+                                <h3 class="col-12">Version Control</h3>
+                                <p class="col-12 bg-secondary">is a system that <span class="bg-success">records changes</span> to a file or set of files over time so that you can recall specific versions later.</p>
+                            </div>
+                            <!-- <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control"></a> -->
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Picture that you and your friend Amitoj need to prepare your best friend Sundar weeding</p>
+                                <img class="col-8" src="https://s3-eu-west-1.amazonaws.com/sosnewbucketforlive/blog_img/strand_of_silk_-_indian_weddings_-_indian_wedding_planning_101_guide_to_planning_your_dream_wedding_-_destination.jpg" alt="">
+                            </div>
+                            <!-- <a href="https://strandofsilk.com/indian-fashion-blog/indian-weddings/how-prepare-big-fat-indian-wedding"></a> -->
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row" >
+                                <div class="col-8">
+                                    <p>You create a <u>checklist</u></p>
+                                    <p>You send it to your friend Amitoj</p>
+                                    <p>Amitoj send it back to you</p>
+                                    <p>you realize that he changed everything</p>
+                                    <p class="text-warning">How do you save his version on your device?</p>
+                                </div>
+                                <img class="col-4" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALsAAAENCAMAAABgquSEAAAAhFBMVEX////r6+vS0tLy8vLW1tbj4+MAAAD4+Pjd3d2xsbG+vr78/Pzz8/Pu7u7Gxsb29va4uLjLy8usrKykpKRkZGSFhYWbm5t7e3vBwcFra2uLi4t+fn5wcHCSkpJfX18zMzMsLCxPT08gICBFRUUnJyc/Pz9XV1cTExMcHBxDQ0MQEBA4ODiRKv9nAAAH9klEQVR4nO2di3abOBCGh4vEzWDuNwO2Y8dJm/d/v50R4NBuT7s5W6zQzpcTgmUR/5JGM4OMMQDDMAzDMAzDMH8fgTH+tcKf1LF+WOzsVtDz/WskWXmoLKhigFQA7NM2rwFEbuOTpSQFu0HKWFW2n2U7HeemZdElAJGUJ3sqC9uucMfdTMqLsbb2Sko55Aa8FgASf1spcx/Alwd8spcBbk/H3V7VFfIWlYHaTfCwL3kMgXy2z9IZ/1csX6TMaM+Qjf16XFs7vQ711akHuFa440oq9ORx1u5JMdU8yOVxz62qbYIj07HEkSV2eKpaEaqn1mYncejhDZW8kXZbCcQxt0k77p6f55rnt+VxtwZofHDTNFPRU0sNxEEqT/joVK6ufS9r0oX28mXUTlbRv13SSTtZ0kj+Tb/fctzEV9rM1nEsaBjR5NoBH7X56totGeF2QN3nDndMNT/b5wINvv9KWtK5ZibdpXbq7fQMNA+mImV0T9jdFbU3pmHaCViRUNlMhZ00DEo7+YfiLUZV/Qs9juaa4n0IZu0ZHWLJcS7DKzV+wEY3pfpP1Jz5uVUY7f1ww1e8ANkMdW5xFGg7/St5FPteNZ89itJOQltqQDBX+UpW0lEvkLcJSbafrSgdX5m0k4VWR6WdhBQnwP7un8iBv4+6UJ5zbghpP3RK8zQ01xsVoamcSbEjfxy2fic0uTAMVd31SemLRu2XDtoraV/EmMOiIR2ZS6VczJM/Fl3I+qsTzvpR+3J6rKSdjNOTk1sJpYdbVF1KaI/faQ/k+b7fku+sqAFw9caigYwux84/l7AwpRU5Ut9Fs/ZARcbySrGFtCdL7VjlbgcpOdP+y1J7R57l0kz2FDwgOJFrR4kO9TTMw4DmI9v+OPudmYXHpJHCBtDubDNkY0A1OhoAR67qHxU3Cu4kMRu1Y3YANWo/HEm7IKs9PJ8mHa+3u3Z0QhhXyQWq2U4tUT4Va5YYGDDorZ9L3goYXzJVQr7Sw+iJhoJsIKC5Wxzk5Otu9wxL9bsg2bt5UlJRRV1eYz6DRremax+Z0hgXX5qM+aSiK3WqvJD9UpaGVjyFpbd7TqPsPSALM2Rw126pMQgpz6hxFJzXalXtTxRRXHzNWJn2M01dm7Q3klxJS54TGuVQsIvvWkqluLlSL8Nd+/OYl9H8L3GInOsyFP9+JI2yQC8fo92I+uXsW+C+KCmkPVTmch71te8+u1BBllKGZh6L7uX5Mu6l2A3XblXZipOafi+m6vfsdLmcEjDGMKWUxPLS4UkF2setke957djvmCcM94zn7X5aBUd5foCbAWdOUpx6UUgbdzpfahvfRc9nlv0y2kyevhzuyRq8T06nbdaPqsynwEBrcUBACDsyGycwsEhg0Z4KJ+tKwMRHpuOCZePJBXpXLIohAjcwhXjA6sYPydIkExX+dOEtyJ3K7cTBjnu3DYewEfnkx+Myq83OutU5dPawb/2oKzPRRSUdFA/rp74/oq9FYRbuIWmtDjrRuZXdGakXVja2xn5P3lOvtc0KcjOHxh2gjUQVZ27hedYNDsmwfjz9N20StXYbVkaxa4LcyJ2DqPZZjMILJ98t3XVZHxLzAIMYIBc3KEy79EqzzDJrgMY4/2QdbSX6xC6NBs4wBDfAHjXKpLQ9zyicAQvP39Qt3MqMM6sKTnDD38u+d+PSi0psKB56DR6t3c6NDvJdH5dJUZd2VBq52xmDaKASaZZ6y7q500DjVCKLkqz23F5UQR40+xzyPRb6j5aO0WYwC7jtMq9wy7oK43I/2B0MboO275dZ/F6zC3OrEnmY+cbBbkVlF9jbldFYndtYy4qPI8zjDm4WChdl1qAVOAPZgI9dKuKsv8fdxs2NxuisHk3EbJNCVM6wawR6orALey3S0Z/3aDY9tNBBahyM2DVSM4V2j+fdkFnFNAcPRm9kYWL7/r6ABkr8KaAPMxGHrmlqMBiGYRhmmxjxxAbPI/19oID013U/G/68HOD9tNqnhLXrgbXrYdPa5/Nf1O4YmvngubibeiPJ9rQzDMOsTTL7yI3Hpq2x6ZyAtWuBteth034msU3CzgBCWy/mB3PgQEzoePeTYZi/AsedePyFCv8b3x6li1WvSF+HTcfVLeczrF0LrF0PW17DNuf1mXh72hmGYdbm/j5f/eu6nw3OgfXA2vXA2vWwaT9j7BT7lO54oJkP5sBWHY0IummMZtYZHoZhdGONPtLa4Dl67U8+ktewH8qm8xnWrgXWroelnwkczXxQe+T5I5i/W65mPhofg4kPHsYwDPNfua9hR7+u+9ngHFgPrF0PrF0Pm/Yz0xq2Qzmw5uuw7Q8ms+G0hl3TZ/wDzawyOgzDaGdeX9jgJK/jeoTXsB/KpvMZ1q4F1q6HLfuZel6foc9RmprZYHxkGObPxoin9/nW/7aT346/m5YX+F6AD4W164G16+FP0b7f2HXYwpvuU0v3Agz1XoYdcv7OMMwn434vwC3mwBteW/pTcoKtwdr1sGntW/YzkZkQ5gbXsIP5HiQfvficYRjmP7KLkpEHfKXr78Y3rJDYcf7+UDadz7B2LbB2PXzzOUq9y8Afvh+HPa/P+Nu7DwrDMMzaLH3k1uAcWA+sXQ+sXQ+b9jOGWuIIrXR7a9i7aWkpMdbpG4ZhmPt7ZRv83iw/mnwrf47yoWw6n2HtWmDtetiyn1leY7i176NkGIZhGIZhGIZhGIZhGIZhGOZ/8A/mU5a9k/4UzwAAAABJRU5ErkJggg==" alt="">
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">How would you save his version?</p>
+                                <textarea  class="col-8" rows="10" style="overflow-y:scroll"></textarea>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2>Version Control are use for:</h2>
+                                <ul>
+                                    <li>Backup</li>
+                                    <li class="text-success">long-term history of changes</li>
+                                    <li>Collaboration</li>
+                                    <li>Distributed development</li>
+                                    <li>Traceability</li>
+                                    <li>Investigation</li>
+                                    <li>Audit</li>
+                                    <li>And so on...</li>
+                                </ul>
+                            </div>
+                            <!-- <a href="https://www.atlassian.com/git/tutorials/what-is-version-control"></a> -->
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">Git is also a</h2>
+                                <h3 class="col-12 bg-success">Source Control Management Tool <span class="text-danger">(SCM)</span></h3>
+                            </div>
+                            <!-- <a href="https://www.sciencedaily.com/terms/computer_software.htm"></a> -->
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row" >
+                                <h2 class="col-12">What is</h2>
+                                <h3 class="col-12">a Source Control Management Tool?</h3>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h3 class="col-12">Source Control Management Tool</h3>
+                                <p class="col-12">is a system to</p>
+                                <div class="col-12 bg-secondary">
+                                    <ul>
+                                        <li>track changes in <span class="text-danger">your code</span></li>
+                                        <li>see a revision history for <span class="text-danger">your code</span></li>
+                                        <li>help to resolve conflicts in  <span class="text-danger">your code</span></li>
+                                        <li>revert to previous versions of  <span class="text-danger">your code</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- <a href="https://aws.amazon.com/devops/source-control/"></a> -->
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row" >
+                                <p class="col-12">List of version control software</p>
+                                <div class="embed-responsive embed-responsive-16by9">
+                                    <iframe class="col-12 embed-responsive-item" src="https://en.wikipedia.org/wiki/List_of_version-control_software" frameborder="0"></iframe>
+                                </div>
+                                <button class="btn btn-outline-info"><a href="https://en.wikipedia.org/wiki/List_of_version-control_software" target="_blank">open</a></button>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Most Popular SCMs</p>
+                                <div class="col-12">
+                                    <ol>
+                                        <li>Git</li>
+                                        <li>SVN</li>
+                                        <li>Mercurial</li>
+                                        <li>Perfoce</li>
+                                        <li>RCS</li>
+                                    </ol>
+                                </div>
+                                <!-- <a href="https://www.softwaretestinghelp.com/version-control-software/" target="_blank"></a> -->
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">We Will use</p>
+                                <p class="col-8 bg-primary">Git</p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <img class="col-4" src="https://git-scm.com/images/logo@2x.png" alt="">
+                                <p class="col-12">Git is a distributed version-control system for tracking changes in source code during software development.</p>
+                            </div>
+                            <!-- <a href="https://en.wikipedia.org/wiki/Git"></a> -->
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Why do we need Git in testing?</p>
+                                <textarea  class="col-8" rows="10" style="overflow-y:scroll"></textarea>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <div class="container">
+                        <div class="row justify-content-center" >
+                            <h3 class="col-12">Install Git</h3>
+                            <p class="col-12">Git is available on</p>
+                            <div>
+                                <ul>
+                                    <li>Windows</li>
+                                    <li>macOS</li>
+                                    <li>Linux</li>
+                                </ul>
+                            </div>
+                            <p class="col-12">You can downloads Git <a href="https://git-scm.com/downloads" target="_blank">here</a></p>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="container">
+                        <div class="row justify-content-center" >
+                            <p class="col-12">You can use git online <a href="https://repl.it/" target="_blank">here</a></p>
+                            <ol>
+                                <li>Click on Start Coding</li>
+                                <li>Choose <span class="text-warning">Bash</span></li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                hash: true,
+                // Display a presentation progress bar
+                progress: true,
+                // Display the page number of the current slide
+                slideNumber: true,
+                // Factor of the display size that should remain empty around
+                // the content
+                margin: 0,
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+            });
+        </script>
+    </body>
+</html>
