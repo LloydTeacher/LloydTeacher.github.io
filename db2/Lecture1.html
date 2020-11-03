@@ -1,0 +1,346 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Lecture 1</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <!-- 
+• Conceptual Model
+• Logical Model
+• ER Diagram
+• Crow Foot Notation
+• Insert
+• Update
+• Delete
+• Select, inner & outer Join, Group
+By
+
+         -->
+        <div class="reveal">
+            <div class="slides">
+                <section>
+					<div class="container">
+						<div class="row" >
+							<h1 class="col-12">Review</h1>
+							<h3 class="col-12">introduction to Database Design I</h3>
+							<h4 class="col-12">Model & DML </h4>
+						</div>
+					</div>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">What is a Database?</p>
+                                <textarea  class="col-8" rows="10" style="overflow-y:scroll"></textarea>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">What do you remember from <span class="text-success">Database Design I</span>?</p>
+                                <textarea  class="col-8" rows="10" style="overflow-y:scroll"></textarea>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">What is a database?</h2>
+                                <blockquote>A place where data is stored in a structured manner </blockquote>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p>A <span class="text-success">place</span> where <span class="text-danger">data</span> is <span class="text-info">stored</span>  in a  <span class="text-warning">structured</span> manner </p>
+                                <ul>
+                                    <li><span class="text-success">place</span> : computer</li>
+                                    <li><span class="text-danger">data</span> : number, string, date</li>
+                                    <li><span class="text-info">stored</span> : bits</li>
+                                    <li><span class="text-warning">structured</span> : tables, objects, files</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">Entity relationship Diagram (ERD)</h2>
+                                <blockquote>It is a diagram which specifies the relationship that can exist between entities</blockquote>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h3>Example of ER Diagram</h3>
+                                <div class="col-8">
+                                    <div class="row justify-content-center" >
+                                        <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQiT4iqNowG_w-ofkxGqLGXhDVmhPO6FdssSw&usqp=CAU" alt="">
+                                    </div>
+                                    <div class="row justify-content-center" >
+                                        <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRaavuugunxNaefdqOdnLB1Q9stpSHMlKX49w&usqp=CAU" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                        <img class="img-fluid" src="data:image/png;base64,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" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h3>Relationship</h3>
+                                <blockquote>A relationship is an association and cardinality between entities</blockquote>
+                            </div>
+                            <div class="row justify-content-center" >
+                                <ul>
+                                    <li>a driver drives a car</li>
+                                    <li>a car has a driver</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h3>Relationship Diagram</h3>
+                                <p class="col-12">cardinality and association</p>
+                                <div class="col-6">
+                                    <img class="img-fluid" width="110%" src="https://discourse.omnigroup.com/uploads/default/original/2X/5/54b713a5fe9dc79b458b8afe1a5a148320ba132d.gif" alt="">
+                                </div>
+                                <div class="col-6" >
+                                    <img class="img-fluid" width="100%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTkXSd1azH9dAB2V5O5_q-6MdRwrPu82XfWMw&usqp=CAU" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h3>Entity</h3>
+                            </div>
+                            <div class="row justify-content-center" >
+                                <blockquote>A Entity is any item that you need to store some attributes or properties</blockquote>
+                            </div>
+                            <div class="row" >
+                                <div class="col-4">
+                                    <p class="justify-content-left">A student has :</p>
+                                </div>
+                                <div class="col-6">
+                                    <ul class="justify-content-right">
+                                        <li>Id</li>
+                                        <li>First Name</li>
+                                        <li>Last Name</li>
+                                        <li>Section</li>
+                                        <li>Start Date</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h3>Entity Diagram</h3>
+                                <p class="col-12">Entities and attributes</p>
+                                <div class="col-6">
+                                    <img class="img-fluid" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ8twnCKrkX1Ff3-LqsBBTCphewkGV5hv6Ydw&usqp=CAU" alt="">
+                                </div>
+                                <div class="col-6" >
+                                    <img class="img-fluid" src="https://www.vertabelo.com/blog/crow-s-foot-notation/crows-foot-notation-attributes.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">Conceptual Model</h2>
+                                <p>It is a diagram which contains:</p>
+                                <ul>
+                                    <li>The name of the Entity</li>
+                                    <li>If there are links with other Entities</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">Conceptual Model</h2>
+                                <blockquote>It hides the internal details like primary/foreign keys, datatype and other contraints</blockquote>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">Conceptual Model</h2>
+                            </div>
+                            <div class="row justify-content-center" >
+                                <ul>
+                                    <li>A student enrolls in many courses</li>
+                                    <li>A course contains many student</li>
+                                </ul>
+                                <img class="img-fluid" width="60%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQiT4iqNowG_w-ofkxGqLGXhDVmhPO6FdssSw&usqp=CAU" alt="">
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">Logical Model</h2>
+                                <p>It is a diagram which contains:</p>
+                                <ul>
+                                    <li>The name of the Entity</li>
+                                    <li>The list of attributes</li>
+                                    <li>The relationship with other Entities</li>
+                                    <li>The primary keys</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">Logical Model</h2>
+                                <blockquote>It hides the internal details like foreign keys, datatype and other contraints</blockquote>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">Logical Model</h2>
+                                <img class="img-fluid" width="50%" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQJlV8SsPsiMRiZa3O0M9Ho7i41wsidUwuIaQ&usqp=CAU" alt="">
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2 class="col-12">What is SQL?</h2>
+                                <blockquote class="col-12">SQL stand for Structured Query Language, <br> which is a computer language for storing, manipulating and retrieving data stored in relational database.</blockquote>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">What are some SQL commands?</p>
+                                <textarea  class="col-8" rows="10" style="overflow-y:scroll"></textarea>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row" >
+                                <h2 class="col-12">SQL commands categories</h2>
+                                <div class="form-check">
+                                    <input  class="col-4 form-control form-check-input" type="checkbox" checked><label class="col-8">Data Manipulation Language</label>
+                                    <input  class="col-4 form-control form-check-input" type="checkbox" checked><label class="col-8">Data Query Language</label>
+                                    <input  class="col-4 form-control form-check-input" type="checkbox"><label class="col-8">Data Definition Language</label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <div class="container">
+                        <div class="row justify-content-center" >
+                            <h3>Data manipulation language</h3>
+                            <blockquote class="col-12">regroup commands which affect only the rows </blockquote>
+                            <ul>
+                                <li>Insert</li>
+                                <!-- Creates a rows. -->
+                                <li>Update</li>
+                                <!-- Modify a rows. -->
+                                <li>Delete</li>
+                                <!-- Remove a rows. -->
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="container">
+                        <div class="row justify-content-center" >
+                            <h3>Data Query Language</h3>
+                            <blockquote class="col-12">Contains one command which capture Tables, columns and rows</blockquote>
+                            <ul>
+                                <li>Select</li>
+                                <!-- Retrieves certain records from one or more tables. -->
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="container">
+                        <div class="row justify-content-center" >
+                            <h3>Data Definition Language</h3>
+                            <blockquote class="col-12">regroup commands which affect the entire table and the columns</blockquote>
+                            <ul>
+                                <li>CREATE</li>
+                                <!-- Creates a new table, a view of a table, or other object in database  -->
+                                <li>ALTER</li>
+                                <!-- Modifies an existing database object, such as a table. -->
+                                <li>DROP</li>
+                                <!-- Deletes an entire table, a view of a table or other object in the database -->
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                hash: true,
+                // Display a presentation progress bar
+                progress: true,
+                // Display the page number of the current slide
+                slideNumber: true,
+                // Factor of the display size that should remain empty around
+                // the content
+                margin: 0,
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+            });
+        </script>
+    </body>
+</html>
