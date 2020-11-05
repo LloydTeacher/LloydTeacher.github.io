@@ -1,0 +1,252 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Lecture 2</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <!-- 
+Create & Drop Database
+• Create & Drop Tables
+• Constraints: Primary Key, Foreign
+Key, Unique, Default
+By
+
+         -->
+        <div class="reveal">
+            <div class="slides">
+                <section>
+					<div class="container">
+						<div class="row" >
+							<h3 class="col-12"><span class="text-warning">D</span>ata <span class="text-warning">D</span>efinition <span class="text-warning">L</span>anguage</h3>
+							<h4 class="col-12">Create & Drop Statements</h4>
+						</div>
+					</div>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">What is a Relational Database Management System (RDBMS)?</p>
+                                <textarea  class="col-8" rows="10" style="overflow-y:scroll"></textarea>
+<!-- 
+    - classification of data in form of table
+- collection of information which is organized in order to search it
+ -->
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h5>Relational Database Management System (RDBMS)</h5>
+                                <blockquote class="col-12">A relational database management system (RDBMS) is a <span class="text-success">program/software</span> that allows you to create, update, and administer a relational database.</blockquote>
+                            </div>
+                            <!-- <a href="https://www.codecademy.com/articles/what-is-rdbms-sql"></a> -->
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h5>Relational Database Management System (RDBMS)</h5>
+                                <blockquote class="col-12">Many relational database systems have an option of using the <span class="text-danger">SQL</span> (Structured Query Language) for querying and maintaining the database.</blockquote>
+                                <a href="https://en.wikipedia.org/wiki/Relational_database"></a>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h5>Relational Database Management System (RDBMS)</h5>
+                                <p>Most Popular from <a href="https://db-engines.com/en/ranking">DB-Engines Ranking</a></p>
+                                
+                                <ol>
+                                    <li>Oracle</li>
+                                    <li class="text-success">MySQL</li>
+                                    <li>Microsoft SQL Server</li>
+                                    <li>PostgreSQL</li>
+                                    <li>IBM Db2</li>
+                                    <li>SQLite</li>
+                                    <li>Microsoft Access</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2>Install the MySQL RDBMS</h2>
+                                <p>There are many ways to install MySQL.</p>
+                                <blockquote>We will use the software bundle call <span class="text-warning">XAMPP</span></blockquote>
+
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2>Install XAMPP</h2>
+                                <ol>
+                                    <li>Click on this link <a href="https://www.apachefriends.org/download.html">XAMPP download</a></li>
+                                    <li>Download the latest version for your operating system</li>
+                                    <li>Run The installer</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2>XAMPP Control Panel</h2>
+                                <div class="col-6">
+                                    <img class="img-fluid" src="https://www.edureka.co/blog/wp-content/uploads/2019/07/Xamp-Control-Panel-how-to-run-php-program-Edureka-1.jpg" alt="">
+                                </div>
+                                <ol class="col-4">
+                                    <li>Activate MySQL</li>
+                                    <li>Activate Apache</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <h2>Launch phpmyadmin</h2>
+                                <p class="col-12">Navigate to <a href="http://localhost/phpmyadmin">http://localhost/phpmyadmin</a></p>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Create a new database or schema </p>
+<pre class="col-8"><code class="language-sql"> CREATE DATABASE Country; </code></pre>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">list all databases or schemas </p>
+<pre class="col-8"><code class="language-sql"> SHOW DATABASES; </code></pre>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Create a new database or schema <br> if it was not created previously</p>
+<pre class="col-8"><code class="language-sql"> CREATE DATABASE IF NOT EXISTS Country; </code></pre>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Remove a database or schema </p>
+<pre class="col-8"><code class="language-sql">DROP DATABASE Country;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Remove database or schema <br> if it was created previously</p>
+<pre class="col-8"><code class="language-sql"> CREATE DATABASE IF EXISTS Country;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row" >
+                                <h2>SQL table column Constraints</h2>
+                                <p class="col-12">String</p>
+                                <!-- TODO: Find other column constraints -->
+                                <ul>
+                                    <li>NOT NULL</li>
+                                    <li>DEFAULT</li>
+                                    <li>UNIQUE</li>
+                                    <li>AUTO_INCREMENT</li>
+                                    <li>PRIMARY Key</li>
+                                    <li>FOREIGN Key</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Create a new table </p>
+<pre class="col-8"><code class="language-sql">CREATE TABLE Persons (
+    ID INT,
+    LastName VARCHAR(255),
+    FirstName VARCHAR(255),
+    Age INT
+    ); </code></pre>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">list all tables</p>
+<pre class="col-8"><code class="language-sql"> SHOW TABLES; </code></pre>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Create a new table or schema <br> if it was not created previously</p>
+<pre class="col-8"><code class="language-sql"> CREATE table IF NOT EXISTS Country; </code></pre>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <!-- TODO : DROP TABLE , ALTER DELETE -->
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                hash: true,
+                // Display a presentation progress bar
+                progress: true,
+                // Display the page number of the current slide
+                slideNumber: true,
+                // Factor of the display size that should remain empty around
+                // the content
+                margin: 0,
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+            });
+        </script>
+    </body>
+</html>
