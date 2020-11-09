@@ -133,8 +133,8 @@ By
                     <section>
                         <div class="container">
                             <div class="row justify-content-center" >
-                                <p class="col-12">Create a new database or schema </p>
-<pre class="col-8"><code class="language-sql"> CREATE DATABASE Country; </code></pre>
+                                <p class="col-12">Create a new table </p>
+<pre style="font-size: 100%;" class="col-8"><code class="language-sql"> CREATE DATABASE Country; </code></pre>
                             </div>
                         </div>
                     </section>
@@ -142,7 +142,7 @@ By
                         <div class="container">
                             <div class="row justify-content-center" >
                                 <p class="col-12">list all databases or schemas </p>
-<pre class="col-8"><code class="language-sql"> SHOW DATABASES; </code></pre>
+<pre style="font-size: 100%;" class="col-8"><code class="language-sql"> SHOW DATABASES; </code></pre>
                             </div>
                         </div>
                     </section>
@@ -150,7 +150,7 @@ By
                         <div class="container">
                             <div class="row justify-content-center" >
                                 <p class="col-12">Create a new database or schema <br> if it was not created previously</p>
-<pre class="col-8"><code class="language-sql"> CREATE DATABASE IF NOT EXISTS Country; </code></pre>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> CREATE DATABASE IF NOT EXISTS Country; </code></pre>
                             </div>
                         </div>
                     </section>
@@ -160,7 +160,7 @@ By
                         <div class="container">
                             <div class="row justify-content-center" >
                                 <p class="col-12">Remove a database or schema </p>
-<pre class="col-8"><code class="language-sql">DROP DATABASE Country;</code></pre>
+<pre style="font-size: 100%;" class="col-8"><code class="language-sql">DROP DATABASE Country;</code></pre>
                             </div>
                         </div>
                     </section>
@@ -168,62 +168,115 @@ By
                         <div class="container">
                             <div class="row justify-content-center" >
                                 <p class="col-12">Remove database or schema <br> if it was created previously</p>
-<pre class="col-8"><code class="language-sql"> CREATE DATABASE IF EXISTS Country;</code></pre>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> DROP DATABASE IF EXISTS Country;</code></pre>
                             </div>
                         </div>
                     </section>
                 </section>
                 <section>
-                    <section>
-                        <div class="container">
-                            <div class="row" >
-                                <h2>SQL table column Constraints</h2>
-                                <p class="col-12">String</p>
-                                <!-- TODO: Find other column constraints -->
+                    <div class="container">
+                        <div class="row" >
+                            <h2>SQL table column Data Types</h2>
+                            <!-- TODO: Find other column constraints -->
+                            <ul>
+                                <li>INT, DECIMAL, FLOAT</li>
+                                <li>DATETIME, DATE, TIME</li>
+                                <li>VARCHAR(max), CHAR, TEXT</li>
+                                <li>BINARY, BOOLEAN</li>
+                            </ul>
+                        </div>
+                        <!-- <a href="https://www.geeksforgeeks.org/sql-datatypes/"></a> -->
+                        <!-- <a href="https://www.guru99.com/how-to-create-a-database.html"></a> -->
+                        <!-- <a href="https://www.geeksforgeeks.org/sql-datatypes/"></a> -->
+                    </div>
+                </section>
+                <section>
+                    <div class="container">
+                        <div class="row" >
+                            <h2>SQL table column Constraints</h2>
+                            <!-- TODO: Find other column constraints -->
+                            <div class="col-6">
                                 <ul>
                                     <li>NOT NULL</li>
                                     <li>DEFAULT</li>
                                     <li>UNIQUE</li>
+                                    <li>CHECK</li>
+                                </ul>
+                            </div>
+                            <ul>
+                            <div class="col-">
+                                <ul>
                                     <li>AUTO_INCREMENT</li>
                                     <li>PRIMARY Key</li>
                                     <li>FOREIGN Key</li>
                                 </ul>
                             </div>
                         </div>
+                        <!-- <a href="https://www.geeksforgeeks.org/sql-constraints/?ref=lbp"></a> -->
+                    </div>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Create a new table or entity</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql">CREATE TABLE Persons (
+    PersonID INT,
+    FullName VARCHAR(25),
+    Birthday DATE,
+    height DECIMAL
+); </code></pre>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">list all tables or entities</p>
+<pre style="font-size: 100%;" class="col-8"><code class="language-sql"> SHOW TABLES; </code></pre>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Create a new table or entity<br> if it was not created previously</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> CREATE TABLE IF NOT EXISTS Persons (
+    PersonsID INT,
+    FullName VARCHAR(25),
+    Birthday DATE,
+    height DECIMAL
+);</code></pre>
+                            </div>
+                        </div>
                     </section>
                 </section>
                 <section>
                     <section>
                         <div class="container">
                             <div class="row justify-content-center" >
-                                <p class="col-12">Create a new table </p>
-<pre class="col-8"><code class="language-sql">CREATE TABLE Persons (
-    ID INT,
-    LastName VARCHAR(255),
-    FirstName VARCHAR(255),
-    Age INT
-    ); </code></pre>
+                                <p class="col-12">Remove a table or entity</p>
+<pre style="font-size: 100%;" class="col-8"><code class="language-sql">DROP TABLE Persons;</code></pre>
                             </div>
                         </div>
                     </section>
                     <section>
                         <div class="container">
                             <div class="row justify-content-center" >
-                                <p class="col-12">list all tables</p>
-<pre class="col-8"><code class="language-sql"> SHOW TABLES; </code></pre>
-                            </div>
-                        </div>
-                    </section>
-                    <section>
-                        <div class="container">
-                            <div class="row justify-content-center" >
-                                <p class="col-12">Create a new table or schema <br> if it was not created previously</p>
-<pre class="col-8"><code class="language-sql"> CREATE table IF NOT EXISTS Country; </code></pre>
+                                <p class="col-12">Remove table or entity <br> if it was created previously</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> DROP TABLE IF EXISTS Persons;</code></pre>
                             </div>
                         </div>
                     </section>
                 </section>
-                <!-- TODO : DROP TABLE , ALTER DELETE -->
+                <section>
+                    <h2>References</h2>
+                    <a href="https://www.hcoe.edu.np/uploads/attachments/r96oytechsacgzi4.pdf">sqltutorialpoint.pdf</a>
+                    <a href="https://www.w3schools.com/sql/">https://www.w3schools.com/sql/</a>
+                    <a href="https://www.tutorialspoint.com/sql/index.htm">https://www.tutorialspoint.com/sql/index.htm</a>
+                    <a href="https://www.guru99.com/sql.html">https://www.guru99.com/sql.html</a>
+                    <a href="https://www.geeksforgeeks.org/sql-tutorial/#mysql">https://www.geeksforgeeks.org/sql-tutorial/#mysql</a>
+                </section>
             </div>
         </div>
 
