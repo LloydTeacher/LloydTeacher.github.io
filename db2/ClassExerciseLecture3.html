@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 3</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-sql">
+-- Create a new database if it was not created before
+CREATE DATABASE IF NOT EXISTS Travels;
+
+-- Select the database Travels
+USE Travels;
+
+-- Display the list of databases
+SHOW DATABASES;
+
+-- Question:
+-- you want to store the list of city that you have visited and the date when you visited them
+-- Create a new table with at lease those field cityName, visitedDate
+
+-- Delete the table CityTraveled if it was created before
+DROP TABLE IF EXISTS CityTraveled;
+
+-- Create a new table CityTraveled 
+CREATE TABLE CityTraveled (
+  cityID INT,
+  cityName VARCHAR(20),
+  visitedDate DATE
+);
+
+-- Create a new table CityTraveled with constraints if it was not created before
+CREATE TABLE IF NOT EXISTS CityTraveled (
+  cityID INT PRIMARY KEY AUTO_INCREMENT,
+  cityName VARCHAR(20) UNIQUE,
+  visitedDate DATE NOT NULL
+);
+
+-- Insert record in this table CityTraveled
+INSERT INTO CityTraveled (cityID,cityName,visitedDate) VALUES (1,"Montreal", "2020-11-09");
+INSERT INTO CityTraveled  VALUES (2,"Longeuil", "2019-11-09");
+
+INSERT INTO CityTraveled  VALUES (3,"Toronto", "2019-1-17") , (4,"Brampton", "2019-1-17");
+
+-- Display the records
+SELECT * FROM CityTraveled;
+
+-- Add the column country in the table CityTraveled
+ALTER TABLE CityTraveled ADD country VARCHAR(20);
+
+
+-- Change the column visitedDate from datatype date to datatype VARCHAR(15);
+ALTER TABLE CityTraveled MODIFY COLUMN visitedDate VARCHAR(15);
+
+-- Display name, data of the fields
+DESCRIBE CityTraveled;
+
+-- Set the next value of the auto increment of the primary key
+ALTER TABLE CityTraveled AUTO_INCREMENT=100;
+
+-- insert a new record to the table 
+INSERT INTO CityTraveled (cityName, visitedDate) VALUES ( "Surrey", "2020-03-26");
+
+-- Display the records
+SELECT * FROM CityTraveled;
+
+
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
