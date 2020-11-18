@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 3</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-sql">
+-- -----------------------------------------------------
+-- Table Driver
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Driver (
+   Driver_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   Name VARCHAR(45) NULL,
+   Car VARCHAR(45) NULL,
+   Phone VARCHAR(20) NULL,
+   AllowLuggae BOOLEAN NULL DEFAULT TRUE
+);
+
+-- -----------------------------------------------------
+-- Table Rider
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Rider (
+   Rider_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   Name VARCHAR(45) NULL,
+   Phone VARCHAR(20) NULL
+);
+
+-- -----------------------------------------------------
+-- Table Trip
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS Trip (
+   Trip_ID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   FromCity VARCHAR(45) NULL,
+   ToCity VARCHAR(45) NULL,
+   Fare DECIMAL NULL DEFAULT 10.00,
+   Departure TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+   MaximumSeat INT DEFAULT 1,
+   Driver_ID INT NOT NULL,
+   FOREIGN KEY (Driver_ID) REFERENCES Driver (Driver_ID),
+   ReserveSeat INT DEFAULT 0
+);
+
+INSERT INTO Driver (Name,Car,Phone,AllowLuggae )
+VALUES ("Nishi","Green Subaru","(438) 556-4492",TRUE),
+("Kyra","Black Nissan","(416) 576-6807",FALSE), 
+("Tuyen","blue Toyota","(438) 591-7081",FALSE);
+
+INSERT INTO Rider (Name,Phone )
+VALUES ("Abdul","(438) 377-8743"),
+("Nasim","(514) 245-9690"),
+("Trisha","(514) 921-3495");
+
+INSERT INTO trip (FromCity, ToCity, Fare, Departure,MaximumSeat,Driver_ID)
+VALUES ('Montreal', 'Ottawa', 20, "2019-02-20 4:00:00",2,(SELECT Driver.Driver_ID FROM Driver WHERE Name="Nishi")),
+('Toronto', 'Quebec', 45, "2019-01-10 13:30:00",1,(SELECT Driver.Driver_ID FROM Driver WHERE Name="Kyra")),
+('Sherbrooke', 'Kingston', 45, "2019-03-29 10:30:00",2,(SELECT Driver.Driver_ID FROM Driver WHERE Name="Tuyen"));
+
+
+
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
