@@ -1,0 +1,246 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 4</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-sql">
+CREATE DATABASE IF NOT EXISTS  w3schools;
+
+USE w3schools;
+
+
+CREATE TABLE IF NOT EXISTS categories (
+    categoryid INT NOT NULL,
+    description VARCHAR(100)
+);
+
+INSERT INTO categories (categoryid,description) VALUES (0,"Album");
+INSERT INTO categories (categoryid,description) VALUES (NULL,"BOOks");
+SELECT * FROM categories;
+
+ALTER TABLE categories ADD COLUMN CategoryName VARCHAR(100);
+
+-- add the constraint default with the value "no description" to the column  description
+ALTER TABLE categories MODIFY COLUMN description VARCHAR(100) DEFAULT "no description";
+
+-- add the constraint primary key to the column categoryid fot the table categories
+ALTER TABLE categories MODIFY COLUMN categoryid INT PRIMARY KEY;
+ALTER TABLE categories AUTO_INCREMENT=2; 
+
+DESCRIBE categories;
+
+UPDATE categories SET categoryid=1 WHERE description="BOOks";
+
+
+SELECT * FROM categories;
+
+DROP DATABASE IF EXISTS  w3schools;
+CREATE DATABASE IF NOT EXISTS  w3schools;
+
+USE w3schools;
+
+CREATE TABLE IF NOT EXISTS categories (
+    categoryid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    categoryname VARCHAR(100),
+    description VARCHAR(100));
+
+CREATE TABLE IF NOT EXISTS products (
+    productid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    productname VARCHAR(100),
+    unit VARCHAR(100),
+    price DOUBLE,
+    categoryid int,
+    supplierid int,
+    FOREIGN KEY (categoryid) REFERENCES categories(categoryid)
+    );
+    
+    
+    /* INSERT QUERY NO: 1 */
+INSERT INTO Categories(categoryid, categoryname, description)
+VALUES
+(
+1, 'Beverages', 'Soft drinks'
+);
+
+/* INSERT QUERY NO: 2 */
+INSERT INTO Categories(categoryid, categoryname, description)
+VALUES
+(
+2, 'Condiments', 'Sweet and savory sauces'
+);
+
+/* INSERT QUERY NO: 3 */
+INSERT INTO Categories(categoryid, categoryname, description)
+VALUES
+(
+3, 'Confections', 'Desserts'
+);
+
+/* INSERT QUERY NO: 4 */
+INSERT INTO Categories(categoryid, categoryname, description)
+VALUES
+(
+4, 'Dairy Products', 'Cheeses'
+);
+
+
+
+/* INSERT QUERY NO: 2 */
+INSERT INTO Products(productid, productname, supplierid, categoryid, unit, price)
+VALUES
+(
+2, 'Chang', 1, 1, '24 - 12 oz bottles', 19
+);
+
+/* INSERT QUERY NO: 3 */
+INSERT INTO Products(productid, productname, supplierid, categoryid, unit, price)
+VALUES
+(
+3, 'Aniseed Syrup', 1, 2, '12 - 550 ml bottles', 10
+);
+
+/* INSERT QUERY NO: 12 */
+INSERT INTO Products(productid, productname, supplierid, categoryid, unit, price)
+VALUES
+(
+12, 'Queso Manchego La Pastora', 5, 4, '10 - 500 g pkgs.', 38
+);
+INSERT INTO Products(productid, productname, supplierid, categoryid, unit, price)
+VALUES
+(
+16, 'Pavlova', 7, 3, '32 - 500 g boxes', 17.45
+);
+
+INSERT INTO Products( productname, supplierid, categoryid, unit, price) VALUES('Lloyd', 7, 3, '32 - 500 g boxes', 17.45);
+
+SELECT * FROM Categories;
+SELECT * FROM Products;
+
+
+DROP DATABASE IF EXISTS  w3schools;
+CREATE DATABASE IF NOT EXISTS  w3schools;
+
+USE w3schools;
+
+CREATE TABLE IF NOT EXISTS categories (
+    categoryid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    categoryname VARCHAR(100),
+    description VARCHAR(100));
+
+CREATE TABLE IF NOT EXISTS products (
+    productid INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    productname VARCHAR(100),
+    unit VARCHAR(100),
+    price DOUBLE,
+    categoryid int,
+    supplierid int,
+    FOREIGN KEY (categoryid) REFERENCES categories(categoryid)
+    );
+    
+    
+    /* INSERT QUERY NO: 1 */
+INSERT INTO Categories(categoryid, categoryname, description)
+VALUES
+(
+1, 'Beverages', 'Soft drinks'
+);
+
+/* INSERT QUERY NO: 2 */
+INSERT INTO Categories(categoryid, categoryname, description)
+VALUES
+(
+2, 'Condiments', 'Sweet and savory sauces'
+);
+
+/* INSERT QUERY NO: 3 */
+INSERT INTO Categories(categoryid, categoryname, description)
+VALUES
+(
+3, 'Confections', 'Desserts'
+);
+
+/* INSERT QUERY NO: 4 */
+INSERT INTO Categories(categoryid, categoryname, description)
+VALUES
+(
+4, 'Dairy Products', 'Cheeses'
+);
+
+
+
+/* INSERT QUERY NO: 2 */
+INSERT INTO Products(productid, productname, supplierid, categoryid, unit, price)
+VALUES
+(
+2, 'Chang', 1, 1, '24 - 12 oz bottles', 19
+);
+
+/* INSERT QUERY NO: 3 */
+INSERT INTO Products(productid, productname, supplierid, categoryid, unit, price)
+VALUES
+(
+3, 'Aniseed Syrup', 1, 2, '12 - 550 ml bottles', 10
+);
+
+/* INSERT QUERY NO: 12 */
+INSERT INTO Products(productid, productname, supplierid, categoryid, unit, price)
+VALUES
+(
+12, 'Queso Manchego La Pastora', 5, 4, '10 - 500 g pkgs.', 38
+);
+INSERT INTO Products(productid, productname, supplierid, categoryid, unit, price)
+VALUES
+(
+16, 'Pavlova', 7, 3, '32 - 500 g boxes', 17.45
+);
+
+INSERT INTO Products( productname, supplierid, categoryid, unit, price) VALUES('Lloyd', 7, 3, '32 - 500 g boxes', 17.45);
+/*
+SELECT * FROM Categories;
+SELECT * FROM Products;
+*/
+-- display productname and price from the table products
+SELECT productname,price From products
+
+
+use w3schools;
+-- display productname and price from the table products
+SELECT productname,price From products;
+
+-- display productname and price in order from the table products 
+SELECT productname,price FROM products ORDER BY price DESC, productname;
+
+-- display the first 2 categories from the table categories
+SELECT * FROM categories LIMIT 2 ;
+
+-- display the productname from table products and categoryname table categories where categoryid is the same in both table
+SELECT categories.categoryID, products.productname,categories.categoryname FROM products JOIN categories WHERE products.categoryID = categories.categoryID;
+    
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+

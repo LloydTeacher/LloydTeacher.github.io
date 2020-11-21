@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 5</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-sql">
+-- Display all the employees from the employees table
+SELECT * FROM employees;
+
+-- Display the column names, datatype and constraints for the  employees table
+DESCRIBE employees;
+
+-- Display all the employees who are born before 1950-01-01
+SELECT * FROM employees WHERE birthdate < "1950-01-01";
+
+-- Display the number of employees who are born before 1960-01-01
+SELECT COUNT(employeeid) FROM employees WHERE birthdate < "1960-01-01";
+
+-- Display lastname and firstname of the table employees
+SELECT lastname, firstname FROM employees;
+
+-- Display firstname (displayed as nickname) and lastname of the table employees
+SELECT firstname AS "nick name",lastname FROM employees;
+
+-- Display the number of employees (displayed as "number of employees") from the table employees
+SELECT COUNT(employeeid) AS "number of employees" FROM employees;
+
+-- Display the productname (displayed as product) and the price (displayed as cost) from the table products
+SELECT productname as products, price as cost FROM products;
+
+-- Display the productname from the table products and the suppliername from the table suppliers where supplierid is the same in both table
+SELECT products.productname, suppliers.suppliername FROM suppliers JOIN products WHERE suppliers.supplierid=products.supplierid;
+
+-- Create a view named allprice to display productname and price from the table products
+CREATE VIEW allprice AS SELECT productname, price FROM products;
+
+-- Display the view allprice
+SELECT * FROM allprice;
+
+-- delete the view allquantities
+DROP VIEW IF EXISTS allquantities;
+
+-- Create a view named allquantities to display productid and quantity from the table orderdetails
+CREATE VIEW allquantities AS SELECT productid, quantity FROM orderdetails;
+
+-- Display the view allquantities
+SELECT * FROM allquantities;
+
+-- Display the count, the sum, the maximum, the minimum, the average of price for all the products
+SELECT COUNT(price), SUM(price), MAX(price), MIN(price), AVG(price) FROM products;
+
+-- Display the count (displayed as count), the sum (displayed as sum), the maximum (displayed as maximum), the minimum (displayed as minimum), the average (displayed as average) of price for the products where the price is lower than 30
+SELECT COUNT(price) as count, SUM(price) as sum, MAX(price) as maximum, MIN(price) as minimum, AVG(price) as average FROM products WHERE price;
+
+-- Goal find statistic of the products that we have sold
+-- Display the count (displayed as count), the sum (displayed as sum), the maximum (displayed as maximum), the minimum (displayed as minimum), the average (displayed as average) of price for the products where productid is the same as in orderdetails
+SELECT COUNT(price) as count, SUM(price) as sum, MAX(price) as maximum, MIN(price) as minimum, AVG(price) as average FROM products JOIN orderdetails WHERE products.productid=orderdetails.productid;
+
+-- Create a view name statistic to Display the count (displayed as count), the sum (displayed as sum), the maximum (displayed as maximum), the minimum (displayed as minimum), the average (displayed as average) of price for the products where productid is the same as in orderdetails
+CREATE VIEW statistic AS SELECT COUNT(price) as count, SUM(price) as sum, MAX(price) as maximum, MIN(price) as minimum, AVG(price) as average FROM products JOIN orderdetails WHERE products.productid=orderdetails.productid;
+
+-- Display the view statistic
+SELECT * FROM statistic;
+
+-- Display the maximum from the view statistic
+SELECT maximum FROM statistic;
+
+-- find total price of each category
+-- Display categoryid, sum of the price from the products table group by categoryid
+SELECT categoryid, sum(price) FROM products GROUP by categoryid
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+

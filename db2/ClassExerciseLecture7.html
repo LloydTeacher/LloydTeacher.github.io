@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 7</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-sql">
+--
+-- Database: ipl
+--
+DROP DATABASE IF EXISTS ipl;
+CREATE DATABASE ipl;
+
+use ipl;
+
+CREATE TABLE matches (
+  MatchID int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  HomeTeam varchar(100) NOT NULL,
+  AwayTeam varchar(100) NOT NULL,
+  RunsForHome int(11) NOT NULL,
+  RunsForAway int(11) NOT NULL,
+  wicketsForHome int(11) NOT NULL,
+  wicketsForAway int(11) NOT NULL,
+  StartDate date NOT NULL DEFAULT current_timestamp(),
+  EndDate date DEFAULT NULL
+);
+
+-- Table structure for table players
+
+CREATE TABLE players (
+  playerID int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  Name varchar(25) DEFAULT NULL,
+  Team varchar(25) NOT NULL,
+  Role varchar(25) NOT NULL
+);
+
+-- Table structure for table playersmatches
+
+CREATE TABLE playersmatches (
+  playermatchID int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  PlayerID int(11) NOT NULL,
+   FOREIGN KEY (PlayerID) REFERENCES players (playerID),
+  MatchID int(11) NOT NULL,
+  FOREIGN KEY (MatchID) REFERENCES matches (MatchID)
+);
+
+INSERT INTO matches (HomeTeam,AwayTeam,RunsForHome, RunsForAway, wicketsForHome, wicketsForAway, StartDate) VALUES ( "Delhi","Mumbai", 156, 157, 7, 5, "2020-11-10 18:00:00");
+
+INSERT INTO matches (HomeTeam,AwayTeam,RunsForHome, RunsForAway, wicketsForHome, wicketsForAway, StartDate) VALUES ( "Delhi","Hyderabad", 189, 172, 3, 8, "2020-11-6 18:00:00");
+
+INSERT INTO matches (HomeTeam,AwayTeam,RunsForHome, RunsForAway, wicketsForHome, wicketsForAway, StartDate) VALUES ( "hydrabad","bangalore", 132, 131, 7, 4, "2020-11-6 18:00:00");
+
+INSERT INTO players (Name, Team, Role) VALUES ("Stoinis","Delhi", "Batsman"), ("Ravichandran Ashwin","Delhi", "Bowler"),
+("Priyam Garg","Mumbai", "Batsman"),
+("Sandeep Sharma","Mumbai", "Bowler"),
+("Kolin","bangalore", "Batsman"),
+("Mohammed Siraj","bangalore", "Bowler"),
+("David Warner","Hyderabad", "Batsman"),
+("Holder","Hyderabad", "Bowler");
+
+-- using subqueries insert in the table playersmatches the matches between Stoinis and the matches at "2020-11-10"
+
+/*
+INSERT INTO playersmatches (playerID, MatchID) VALUES (
+    (SELECT playerID FROM players WHERE Name="Stoinis"),
+    (SELECT MatchID FROM matches WHERE startdate="2020-11-10")
+);
+*/
+
+-- using subqueries insert in the table playersmatches the matches between player name Holder and the matches with the awayteam bangalore
+
+INSERT INTO playersmatches (playerID, MatchID) VALUES (
+    (SELECT playerID FROM players WHERE Name="Holder"),
+    (SELECT MatchID FROM matches WHERE awayteam="bangalore")
+);
+
+SELECT * FROM playersmatches;
+
+-- display name from table players and hometeam, awayteam from table matches where playerid and matchid has values in the table playersmatches
+
+SELECT name, hometeam, awayteam FROM players 
+    JOIN playersmatches ON players.playerID=playersmatches.playerID
+    JOIN matches ON playersmatches.MatchID = matches.MatchID;
+
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+

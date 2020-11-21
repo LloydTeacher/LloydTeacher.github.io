@@ -1,0 +1,143 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Lecture 3</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <!-- 
+Create & Drop Database
+• Create & Drop Tables
+• Constraints: Primary Key, Foreign
+Key, Unique, Default
+By
+
+         -->
+        <div class="reveal">
+            <div class="slides">
+                <section>
+					<div class="container">
+						<div class="row" >
+							<h3 class="col-12"><span class="text-warning">D</span>ata <span class="text-warning">D</span>efinition <span class="text-warning">L</span>anguage</h3>
+							<h4 class="col-12">Alter Statements</h4>
+						</div>
+					</div>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Add a new column named gender <br> with a VARCHAR datatype <br> in a table named Persons</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> ALTER TABLE Persons
+    ADD COLUMN Gender VARCHAR(100);</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Add a new column named age <br> with a integer datatype and the Default value of 1 <br> in a table named Persons</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> ALTER TABLE Persons
+    ADD  age INT DEFAULT 1;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Modify a previous column named Birthday <br> with a date and time datatype <br> and the Default value of the current time <br> in a table named Persons</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> ALTER TABLE Persons
+    MODIFY COLUMN Birthday DATETIME
+    DEFAULT CURRENT_TIMESTAMP;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Modify a previous column named PersonID <br> with an integer datatype <br> as a Primary key <br> in a table named Persons</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> ALTER TABLE Persons MODIFY
+    COLUMN PersonID INT PRIMARY KEY;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Modify a Primary key column named PersonID <br> to add the constraint auto increment <br> in a table named Persons</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> ALTER TABLE Persons
+    MODIFY AUTO_INCREMENT;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Modify a Primary key column named PersonID <br> to start the value of the auto increment to 24<br> in a table named Persons</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> ALTER TABLE Persons
+    MODIFY AUTO_INCREMENT=24;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <section>
+                        <div class="container">
+                            <div class="row justify-content-center" >
+                                <p class="col-12">Remove the column Height <br> in a table named Persons</p>
+<pre style="font-size: 100%;" class="col-12"><code class="language-sql"> ALTER TABLE Persons
+    DROP COLUMN Height;</code></pre>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section>
+                    <h2>References</h2>
+                    <a href="https://www.hcoe.edu.np/uploads/attachments/r96oytechsacgzi4.pdf">sqltutorialpoint.pdf</a><br>
+                    <a href="https://www.w3schools.com/sql/">https://www.w3schools.com/sql/</a>
+                    <a href="https://www.tutorialspoint.com/sql/index.htm">https://www.tutorialspoint.com/sql/index.htm</a>
+                    <a href="https://www.guru99.com/sql.html">https://www.guru99.com/sql.html</a>
+                    <a href="https://www.geeksforgeeks.org/sql-tutorial/#mysql">https://www.geeksforgeeks.org/sql-tutorial/#mysql</a>
+                </section>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                hash: true,
+                // Display a presentation progress bar
+                progress: true,
+                // Display the page number of the current slide
+                slideNumber: true,
+                // Factor of the display size that should remain empty around
+                // the content
+                margin: 0,
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+            });
+        </script>
+    </body>
+</html>
