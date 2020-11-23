@@ -73,12 +73,12 @@ INSERT INTO players (Name, Team, Role) VALUES ("Stoinis","Delhi", "Batsman"), ("
 
 -- using subqueries insert in the table playersmatches the matches between Stoinis and the matches at "2020-11-10"
 
-/*
+
 INSERT INTO playersmatches (playerID, MatchID) VALUES (
     (SELECT playerID FROM players WHERE Name="Stoinis"),
     (SELECT MatchID FROM matches WHERE startdate="2020-11-10")
 );
-*/
+
 
 -- using subqueries insert in the table playersmatches the matches between player name Holder and the matches with the awayteam bangalore
 

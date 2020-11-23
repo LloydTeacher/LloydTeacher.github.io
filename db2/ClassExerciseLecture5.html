@@ -43,7 +43,7 @@ SELECT COUNT(employeeid) AS "number of employees" FROM employees;
 SELECT productname as products, price as cost FROM products;
 
 -- Display the productname from the table products and the suppliername from the table suppliers where supplierid is the same in both table
-SELECT products.productname, suppliers.suppliername FROM suppliers JOIN products WHERE suppliers.supplierid=products.supplierid;
+SELECT products.productname, suppliers.suppliername FROM suppliers JOIN products ON suppliers.supplierid=products.supplierid;
 
 -- Create a view named allprice to display productname and price from the table products
 CREATE VIEW allprice AS SELECT productname, price FROM products;
@@ -68,10 +68,10 @@ SELECT COUNT(price) as count, SUM(price) as sum, MAX(price) as maximum, MIN(pric
 
 -- Goal find statistic of the products that we have sold
 -- Display the count (displayed as count), the sum (displayed as sum), the maximum (displayed as maximum), the minimum (displayed as minimum), the average (displayed as average) of price for the products where productid is the same as in orderdetails
-SELECT COUNT(price) as count, SUM(price) as sum, MAX(price) as maximum, MIN(price) as minimum, AVG(price) as average FROM products JOIN orderdetails WHERE products.productid=orderdetails.productid;
+SELECT COUNT(price) as count, SUM(price) as sum, MAX(price) as maximum, MIN(price) as minimum, AVG(price) as average FROM products JOIN orderdetails ON products.productid=orderdetails.productid;
 
 -- Create a view name statistic to Display the count (displayed as count), the sum (displayed as sum), the maximum (displayed as maximum), the minimum (displayed as minimum), the average (displayed as average) of price for the products where productid is the same as in orderdetails
-CREATE VIEW statistic AS SELECT COUNT(price) as count, SUM(price) as sum, MAX(price) as maximum, MIN(price) as minimum, AVG(price) as average FROM products JOIN orderdetails WHERE products.productid=orderdetails.productid;
+CREATE VIEW statistic AS SELECT COUNT(price) as count, SUM(price) as sum, MAX(price) as maximum, MIN(price) as minimum, AVG(price) as average FROM products JOIN orderdetails ON products.productid=orderdetails.productid;
 
 -- Display the view statistic
 SELECT * FROM statistic;

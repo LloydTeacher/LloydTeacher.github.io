@@ -228,7 +228,7 @@ SELECT productname,price FROM products ORDER BY price DESC, productname;
 SELECT * FROM categories LIMIT 2 ;
 
 -- display the productname from table products and categoryname table categories where categoryid is the same in both table
-SELECT categories.categoryID, products.productname,categories.categoryname FROM products JOIN categories WHERE products.categoryID = categories.categoryID;
+SELECT categories.categoryID, products.productname,categories.categoryname FROM products JOIN categories ON products.categoryID = categories.categoryID;
     
                 </code></pre>
             </div>
