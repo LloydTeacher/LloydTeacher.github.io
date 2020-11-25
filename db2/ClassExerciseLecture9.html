@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 7</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-sql">
+-- remove auto transaction capability
+SET AUTOCOMMIT = 0;
+
+-- set begin of the transaction
+START TRANSACTION READ WRITE;
+BEGIN;
+
+
+DROP DATABASE IF EXISTS lloyd;
+CREATE DATABASE lloyd;
+
+USE lloyd;
+
+CREATE TABLE IF NOT EXISTS Apartments (
+  ApartmentID INT PRIMARY KEY AUTO_INCREMENT,
+  Roomstype VARCHAR(25),
+  Floornumber INT NOT NULL,
+  Rent DECIMAL	
+ );
+  
+INSERT INTO Apartments (Roomstype, Floornumber, Rent) 
+  VALUES ("3 1/2", 1, 67 * 35.00),
+         ("3 1/2", 2, 67  * 26.00),
+          ("2 1/2", 3, 67  * 19.00),
+ ("6 1/2",3, 67  * 97.00),
+ ("4 1/2", 4, 67  * 41.00),
+ ("1 1/2", 4, 67  * 14.00);
+ 
+ CREATE TABLE IF NOT EXISTS Leases (
+     LeaseID INT PRIMARY KEY AUTO_INCREMENT,
+     StartDate Timestamp NOT NULL,
+     EndDate Timestamp NULL
+ );
+
+ INSERT INTO leases (StartDate, EndDate) VALUES
+("2016-11-9","2029-11-9")
+("2018-9-30","2021-9-30");
+INSERT INTO leases (StartDate) VALUES ("2014-2-14");
+INSERT INTO leases (StartDate, EndDate) VALUES
+("1998-10-13","2021-9-23");
+
+
+CREATE TABLE IF NOT EXISTS Tenants (
+    TenantID INT PRIMARY KEY AUTO_INCREMENT,
+    Firstname VARCHAR(25),
+    Lastname VARCHAR(25),
+    PhoneNumber VARCHAR(25) UNIQUE,
+    LeaseID  INT,
+    FOREIGN KEY (LeaseID) REFERENCES Leases(LeaseID),
+    ApartmentID  INT,
+    FOREIGN KEY (ApartmentID) REFERENCES Apartments(ApartmentID),
+    Accountbalance DECIMAL DEFAULT 0
+ );
+
+ CREATE TABLE IF NOT EXISTS Animals (
+     AnimalID INT PRIMARY KEY AUTO_INCREMENT,
+     Animaltype  VARCHAR(25) NOT NULL,
+     TenantID  INT,
+    FOREIGN KEY (TenantID) REFERENCES Tenants(TenantID)
+ );
+
+ CREATE TABLE IF NOT EXISTS Issues (
+     IssueID INT PRIMARY KEY AUTO_INCREMENT,
+     Typeofcomplaint   VARCHAR(25) NOT NULL,
+     ApartmentID  INT,
+    FOREIGN KEY (ApartmentID) REFERENCES Apartments(ApartmentID),
+     Level   VARCHAR(25) DEFAULT "High",
+     Status    VARCHAR(25) NOT NULL
+ );
+
+
+INSERT INTO Tenants (Firstname, Lastname, PhoneNumber, LeaseID, ApartmentID, Accountbalance) VALUES
+("Ramesh","Sundar",	"(514)254-8001", 1,	2,	1200.00),
+("Kiara", "Rai","(514)499-2908", 2, 3, -60.00),
+("Karthik", "Arjun","no phone",3,5,-420.5),
+("Atharwa", "Singham","(438)622-2580",3,5,-420.5),
+("Carina","Escondrillas","(514)900-1149",4,6,150.00);
+
+
+
+INSERT INTO Animals (Animaltype, TenantID) VALUES
+("Cat", 2),
+("Dog",4),
+("Parrot", 3),
+("Fish",4);
+
+INSERT INTO Issues (Typeofcomplaint, ApartmentID, Level, Status) VALUES
+("Water leakage from the pipe",5,"High","Fixed"),
+("Problem in the flush system in the washroom",	2,"medium", "Not Fixed"),
+("Hot water system not working",	6,	"High", "Not Fixed"),
+("Bell Not working",3, "Low", "Fixed");
+
+
+
+/*
+2.	The tenant with the last name Arjun email you to say that he gave his parrot to his beloved niece and he would like to indicate that he does not own an animal anymore. So, formulate an SQL expression to delete the animal of the tenant with the last name Arjun.
+*/
+
+DELETE FROM Animals WHERE TenantID =( SELECT TenantID FROM Tenants WHERE Lastname="Arjun");
+
+/*
+3.	You would like to know the statistics of your database. So, formulate the SQL expression to retrieve the count the number of tenants, count the number of animals, some the rent, the maximum balance group by floor number.
+*/
+
+SELECT count(Tenants.TenantID), count(Animals.AnimalID), sum(Apartments.Rent), Max(Tenants.Accountbalance)  FROM Apartments
+INNER JOIN Tenants ON Apartments.ApartmentID= Tenants.ApartmentID 
+INNER JOIN Animals ON Tenants.TenantID=Animals.TenantID GROUP BY Apartments.Floornumber;
+
+COMMIT;
+
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
