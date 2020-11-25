@@ -52,11 +52,11 @@ INSERT INTO Apartments (Roomstype, Floornumber, Rent)
      EndDate Timestamp NULL
  );
 
- INSERT INTO leases (StartDate, EndDate) VALUES
-("2016-11-9","2029-11-9")
+ INSERT INTO Leases (StartDate, EndDate) VALUES
+("2016-11-9","2029-11-9"),
 ("2018-9-30","2021-9-30");
-INSERT INTO leases (StartDate) VALUES ("2014-2-14");
-INSERT INTO leases (StartDate, EndDate) VALUES
+INSERT INTO Leases (StartDate) VALUES ("2014-2-14");
+INSERT INTO Leases (StartDate, EndDate) VALUES
 ("1998-10-13","2021-9-23");
 
 
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS Tenants (
 
  CREATE TABLE IF NOT EXISTS Issues (
      IssueID INT PRIMARY KEY AUTO_INCREMENT,
-     Typeofcomplaint   VARCHAR(25) NOT NULL,
+     Typeofcomplaint   VARCHAR(100) NOT NULL,
      ApartmentID  INT,
     FOREIGN KEY (ApartmentID) REFERENCES Apartments(ApartmentID),
      Level   VARCHAR(25) DEFAULT "High",
@@ -127,6 +127,7 @@ INNER JOIN Tenants ON Apartments.ApartmentID= Tenants.ApartmentID
 INNER JOIN Animals ON Tenants.TenantID=Animals.TenantID GROUP BY Apartments.Floornumber;
 
 COMMIT;
+
 
                 </code></pre>
             </div>
