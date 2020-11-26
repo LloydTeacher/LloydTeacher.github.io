@@ -18,12 +18,7 @@
         <div class="container-fluid">
             <div class="row" >
                 <pre style="font-size: 110%;" class="col-12"><code class="language-sql">
--- remove auto transaction capability
-SET AUTOCOMMIT = 0;
 
--- set begin of the transaction
-START TRANSACTION READ WRITE;
-BEGIN;
 
 
 DROP DATABASE IF EXISTS lloyd;
@@ -51,6 +46,13 @@ INSERT INTO Apartments (Roomstype, Floornumber, Rent)
      StartDate Timestamp NOT NULL,
      EndDate Timestamp NULL
  );
+
+
+ -- remove auto transaction capability
+ SET AUTOCOMMIT = 0;
+ 
+ -- set begin of the transaction
+ START TRANSACTION READ WRITE;
 
  INSERT INTO Leases (StartDate, EndDate) VALUES
 ("2016-11-9","2029-11-9"),
@@ -126,6 +128,124 @@ SELECT count(Tenants.TenantID), count(Animals.AnimalID), sum(Apartments.Rent), M
 INNER JOIN Tenants ON Apartments.ApartmentID= Tenants.ApartmentID 
 INNER JOIN Animals ON Tenants.TenantID=Animals.TenantID GROUP BY Apartments.Floornumber;
 
+
+
+/*
+4
+You would like to call the tenant with the issue with the level low to tell that the
+issue is fixed. So, formulate an SQL expression to display the name (concatenate,
+first name and last name in the same displayed column ) and phone number of
+the tenant related to the issue with the level low.
+*/
+
+SELECT CONCAT(firstname, " ", lastname) AS Name, PhoneNumber From Tenants  WHERE apartmentid =
+( SELECT apartmentid FROM Issues WHERE LEVEL="low");
+
+SELECT CONCAT(firstname, " ", lastname) AS Name, PhoneNumber From Tenants 
+Join Apartments On Tenants.ApartmentID=Apartments.ApartmentID
+Join Issues On Issues.ApartmentID=Apartments.ApartmentID WHERE Issues.Level="low";
+
+
+/*
+5
+. You would like to increase the rent of the apartment with the fish. So, formulate
+an SQL expression to update and add 10 to the rent for the apartment with the fish.
+*/
+
+SELECT Animals.animalType, Apartments.rent FROM Apartments
+INNER JOIN Tenants ON Apartments.ApartmentID=Tenants.ApartmentID
+INNER JOIN Animals ON Tenants.TenantID=Animals.TenantID WHERE AnimalType="Fish";
+
+UPDATE Apartments SET rent=rent+10 WHERE ApartmentID=(
+    SELECT ApartmentID FROM Tenants INNER JOIN Animals ON Tenants.TenantID=Animals.TenantID WHERE AnimalType="Fish"
+);
+
+
+
+
+SELECT Animals.animalType, Apartments.rent FROM Apartments
+INNER JOIN Tenants ON Apartments.ApartmentID=Tenants.ApartmentID
+INNER JOIN Animals ON Tenants.TenantID=Animals.TenantID WHERE AnimalType="Fish";
+
+/*
+6
+A new tenant was financially approved. So, formulate SQL expressions to update
+all the information in all the required table (put random data of your choice).
+Insert data in at least the table Tenants, the table Leases and the table Animals.
+*/
+
+INSERT INTO Leases (startdate,enddate) VALUES (CURRENT_TIMESTAMP,NULL);
+SELECT *  FROM Leases;
+INSERT INTO Tenants (Firstname, Lastname, PhoneNumber, ApartmentID,LeaseID) VALUES  ("Selena", "Gomez", "+1(678)784-955",(SELECT ApartmentID FROM Apartments WHERE RoomsType="6 1/2"), (SELECT Max(LeaseID) FROM Leases));
+SELECT * FROM Tenants;
+INSERT INTO Animals (AnimalType,TenantID) VALUES ("chiwawa",(SELECT TenantID FROM Tenants WHERE Firstname = "Selena" And lastName="Gomez"));
+SELECT * FROM Animals;                                         
+
+/*
+7
+Explain the relationship between the different entities (association and
+cardinalities).
+*/
+
+/*
+
+Relation between Animal and Tenant:
+Association : 
+ - tenant own animals
+ - animanl belong to tenant
+Cardinality : one to many
+
+Association + Cardinality: 
+- one tenant own many animals
+- many animal belong to one tenant
+
+*/
+
+/*
+8
+After some thinking, the column Rent in the Apartments Table, should have been
+in the Leases table. So, formulate SQL expressions to first alter the table lease in
+order to create the new column rent, then update each row with the correct rent
+values.
+*/
+
+SELECT * FROM Apartments;
+
+SELECT L.LeaseID,A.rent  FROM Apartments A
+INNER JOIN Tenants T ON A.Apartmentid=T.Apartmentid
+INNER JOIN Leases L ON T.leaseID=L.LeaseID;
+
+UPDATE Leases SET rent=1742 WHERE leaseID=1;
+UPDATE Leases SET rent=1273 WHERE leaseID=2;
+UPDATE Leases SET rent=2767 WHERE leaseID=3;
+UPDATE Leases SET rent=938 WHERE leaseID=4;
+UPDATE Leases SET rent=6499 WHERE leaseID=5;
+
+-- ALTER TABLE Leases ADD COLUMN rent DECIMAL;
+SELECT A.ApartmentId, L.LeaseID, A.rent  FROM Apartments A
+INNER JOIN Tenants T ON A.Apartmentid=T.Apartmentid
+INNER JOIN Leases L ON T.leaseID=L.LeaseID;
+
+
+SELECT * FROM Leases;
+
+/*
+9
+You want to create a nice view to display some important information regularly.
+So, formulate all the SQL expression to display one view with that information
+Apartment room type, tenant Account balance, tenant first name, tenant last
+name, type of complaint, status of complaint, lease end date.
+*/
+
+CREATE VIEW Important AS SELECT A.RoomsType, T.AccountBalance, T.firstname, T.Lastname, I.Typeofcomplaint, I.Status, L.enddate FROM Leases L 
+INNER JOIN Tenants T ON L.LeaseID=T.LeaseID
+INNER JOIN Apartments A ON T.ApartmentID=A.ApartmentID
+INNER JOIN Issues I ON A.ApartmentID=I.ApartmentID;
+
+SELECT * FROM Important;
+
+
+
 COMMIT;
 
 
@@ -142,4 +262,135 @@ COMMIT;
         </script>
     </body>
 </html>
+
+<!-- 
+
+CREATE USER IF NOT EXISTS 'matrix' IDENTIFIED BY 'hello';
+
+GRANT ALL ON *.* TO 'matrix';
+
+DROP USER IF EXISTS 'matrix';
+
+SELECT * FROM mysql.user;
+
+
+    -- remove autotransaction capability for DML ( SQL command) : INSERT , UPDATE, DELETE
+SET AUTOCOMMIT = 0;
+
+
+
+DROP DATABASE IF EXISTS lloyd;
+CREATE DATABASE lloyd;
+
+USE lloyd;
+
+CREATE TABLE IF NOT EXISTS Apartments (
+  ApartmentID INT PRIMARY KEY AUTO_INCREMENT,
+  Roomstype VARCHAR(25),
+  Floornumber INT NOT NULL,
+  Rent DECIMAL	
+ );
+  
+INSERT INTO Apartments (Roomstype, Floornumber, Rent) 
+  VALUES ("3 1/2", 1, 67 * 35.00),
+         ("3 1/2", 2, 67  * 26.00),
+          ("2 1/2", 3, 67  * 19.00),
+ ("6 1/2",3, 67  * 97.00),
+ ("4 1/2", 4, 67  * 41.00),
+ ("1 1/2", 4, 67  * 14.00);
+ 
+ CREATE TABLE IF NOT EXISTS Leases (
+     LeaseID INT PRIMARY KEY AUTO_INCREMENT,
+     StartDate Timestamp NOT NULL,
+     EndDate Timestamp NULL
+ );
+
+ INSERT INTO Leases (StartDate, EndDate) VALUES
+("2016-11-9","2029-11-9"),
+("2018-9-30","2021-9-30");
+INSERT INTO Leases (StartDate) VALUES ("2014-2-14");
+INSERT INTO Leases (StartDate, EndDate) VALUES
+("1998-10-13","2021-9-23");
+
+
+CREATE TABLE IF NOT EXISTS Tenants (
+    TenantID INT PRIMARY KEY AUTO_INCREMENT,
+    Firstname VARCHAR(25),
+    Lastname VARCHAR(25),
+    PhoneNumber VARCHAR(25) UNIQUE,
+    LeaseID  INT,
+    FOREIGN KEY (LeaseID) REFERENCES Leases(LeaseID),
+    ApartmentID  INT,
+    FOREIGN KEY (ApartmentID) REFERENCES Apartments(ApartmentID),
+    Accountbalance DECIMAL DEFAULT 0
+ );
+
+ CREATE TABLE IF NOT EXISTS Animals (
+     AnimalID INT PRIMARY KEY AUTO_INCREMENT,
+     Animaltype  VARCHAR(25) NOT NULL,
+     TenantID  INT,
+    FOREIGN KEY (TenantID) REFERENCES Tenants(TenantID)
+ );
+
+ CREATE TABLE IF NOT EXISTS Issues (
+     IssueID INT PRIMARY KEY AUTO_INCREMENT,
+     Typeofcomplaint   VARCHAR(100) NOT NULL,
+     ApartmentID  INT,
+    FOREIGN KEY (ApartmentID) REFERENCES Apartments(ApartmentID),
+     Level   VARCHAR(25) DEFAULT "High",
+     Status    VARCHAR(25) NOT NULL
+ );
+
+
+-- set begin of the transaction
+START TRANSACTION READ WRITE;
+
+INSERT INTO Tenants (Firstname, Lastname, PhoneNumber, LeaseID, ApartmentID, Accountbalance) VALUES
+("Ramesh","Sundar",	"(514)254-8001", 1,	2,	1200.00),
+("Kiara", "Rai","(514)499-2908", 2, 3, -60.00),
+("Karthik", "Arjun","no phone",3,5,-420.5),
+("Atharwa", "Singham","(438)622-2580",3,5,-420.5),
+("Carina","Escondrillas","(514)900-1149",4,6,150.00);
+
+SAVEPOINT after;
+
+INSERT INTO Animals (Animaltype, TenantID) VALUES
+("Cat", 2),
+("Dog",4),
+("Parrot", 3),
+("Fish",4);
+
+INSERT INTO Issues (Typeofcomplaint, ApartmentID, Level, Status) VALUES
+("Water leakage from the pipe",5,"High","Fixed"),
+("Problem in the flush system in the washroom",	2,"medium", "Not Fixed"),
+("Hot water system not working",	6,	"High", "Not Fixed"),
+("Bell Not working",3, "Low", "Fixed");
+
+
+
+
+
+/*
+2.	The tenant with the last name Arjun email you to say that he gave his parrot to his beloved niece and he would like to indicate that he does not own an animal anymore. So, formulate an SQL expression to delete the animal of the tenant with the last name Arjun.
+*/
+
+DELETE FROM Animals WHERE TenantID =( SELECT TenantID FROM Tenants WHERE Lastname="Arjun");
+
+/*
+3.	You would like to know the statistics of your database. So, formulate the SQL expression to retrieve the count the number of tenants, count the number of animals, some the rent, the maximum balance group by floor number.
+*/
+
+SELECT count(Tenants.TenantID), count(Animals.AnimalID), sum(Apartments.Rent), Max(Tenants.Accountbalance)  FROM Apartments
+INNER JOIN Tenants ON Apartments.ApartmentID= Tenants.ApartmentID 
+INNER JOIN Animals ON Tenants.TenantID=Animals.TenantID GROUP BY Apartments.Floornumber;
+
+-- ROLLBACK;
+-- ROLLBACK after;
+
+COMMIT;
+Use lloyd;
+SELECT * FROM Tenants;
+SELECT * FROM Issues;
+SELECT * FROM Animals;
+ -->
 
