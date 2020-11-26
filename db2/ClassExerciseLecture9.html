@@ -215,13 +215,14 @@ SELECT L.LeaseID,A.rent  FROM Apartments A
 INNER JOIN Tenants T ON A.Apartmentid=T.Apartmentid
 INNER JOIN Leases L ON T.leaseID=L.LeaseID;
 
+ALTER TABLE Leases ADD COLUMN rent DECIMAL;
+
 UPDATE Leases SET rent=1742 WHERE leaseID=1;
 UPDATE Leases SET rent=1273 WHERE leaseID=2;
 UPDATE Leases SET rent=2767 WHERE leaseID=3;
 UPDATE Leases SET rent=938 WHERE leaseID=4;
 UPDATE Leases SET rent=6499 WHERE leaseID=5;
 
--- ALTER TABLE Leases ADD COLUMN rent DECIMAL;
 SELECT A.ApartmentId, L.LeaseID, A.rent  FROM Apartments A
 INNER JOIN Tenants T ON A.Apartmentid=T.Apartmentid
 INNER JOIN Leases L ON T.leaseID=L.LeaseID;
