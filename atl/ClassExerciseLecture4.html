@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 4</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package triangle;
+
+public class Calculation {
+	
+	public static void main(String[] args) {
+		System.out.println("Triangle");
+		int base = 5;
+		int height = 10;
+		System.out.println("base is "+ base);
+		System.out.println("height is "+ height);
+		// Exercise
+		/*
+		 display in the console the surface area of this right angle triangle
+		 with base = 5 and height = 10
+		 area = base * height /2
+		 */
+		int surfaceArea = base * height /2;
+		String text = "surface area is "+ surfaceArea;
+		System.out.println(text);
+		
+		// Exercise
+		/*
+		 Display in the console the longest side of a right-angled triangle
+		 */
+		double hypothenuse = Math.sqrt( Math.pow(base, 2) + Math.pow(height, 2));
+        
+        // same Calculation but without Math.pow
+		hypothenuse = Math.sqrt( base*base + height*height);
+		
+        // same Calculation but splitting the power
+		double hypothenusePowerOftwo = base*base + height*height;
+		hypothenuse = Math.sqrt(hypothenusePowerOftwo);
+		
+		System.out.println("hypothenuse is " + hypothenuse);
+	}
+
+}
+   
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
