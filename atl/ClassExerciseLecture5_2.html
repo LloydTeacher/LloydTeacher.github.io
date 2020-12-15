@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 4</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package firstScript;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Script {
+
+	public static void main(String[] args) {
+		// indicate the path of chrome connector
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lloyd\\Documents\\Automated\\chromedriver.exe");
+        
+		// launch google chrome
+		WebDriver driver = new ChromeDriver();
+		
+		// navigate to https://www.youtube.com
+		driver.get("https://www.youtube.com");
+		
+		// capture the title of the webpage : Find the element title and return the content
+		String title = driver.getTitle();
+
+		// write the title in the console
+		System.out.println(title.length());
+
+		// close the current tab of google chrome
+		driver.close();
+	}
+}
+  
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
