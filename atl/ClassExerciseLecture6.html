@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 4</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package bank;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Login {
+
+    public static void main(String[] args) {
+        
+        // indicate the path of chrome connector
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lloyd\\Documents\\Automated\\chromedriver.exe");
+        // launch google chrome
+        WebDriver driver = new ChromeDriver();
+        // Use selenium to navigate to the webpage
+        // http://zero.webappsecurity.com/
+        driver.get("http://zero.webappsecurity.com/");
+        
+        String currentValue = driver.getTitle();
+        System.out.println(currentValue);
+        
+        // verify that the title of this webpage is
+        // Zero - Personal Banking - Loans - Credit Cards
+        boolean verification = currentValue.contentEquals("Zero - Personal Banking - Loans - Credit Cards");
+        System.out.println(verification);
+        
+        // if the actual title is equal to the expected title
+        // print title test is passed
+        // else print title test is failed
+        if(verification == true) {
+            System.out.println("Title test is passed");
+        }else {
+            System.out.println("Title test is failed");
+        }
+        
+        // define the locator by id for the signing button
+        By signingButtonLocator = By.id("signin_button");
+        // find element signing button
+        WebElement signingButton = driver.findElement(signingButtonLocator);
+        
+        // click on the signing button
+        signingButton.click();
+        
+        // define the locator by name for the Sing
+        By signButtonLocator = By.name("submit");
+        // find button sign
+        WebElement singButton = driver.findElement(signButtonLocator);
+        // click on the sing button
+        singButton.click();
+        
+        // find the Keep me signed in check box and click on it
+        // define the locator by id for the checkbox
+        By checkboxLocator = By.id("user_remember_me");
+        // find the checkbox
+        WebElement checkbox = driver.findElement(checkboxLocator);
+        // check the checkbox using click
+        checkbox.click();
+        // uncheck the checkbox using click a second time
+        checkbox.click();
+        
+        // alternative the previous lines in order to find the Keep me signed in check box and click on it
+        //driver.findElement(By.name("user_remember_me")).click();
+
+        // find the login textbox and write in it
+        // define the locator by xpath for the login textbox
+        By loginBoxLocator = By.xpath("/html/body/div[1]/div[2]/div/div/div/form/div[2]/div[1]/div/input");
+        // find the login textbox
+        WebElement loginBox = driver.findElement(loginBoxLocator);
+        // write lloyd in the login textbox
+        loginBox.sendKeys("Lloyd");
+        
+        // close all the browser tab and the brower it self
+        driver.quit();
+        
+    }
+
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
