@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        
+        body {
+            font-size: 150%;
+            display: grid;
+            justify-content: center;
+            grid-auto-flow: row;
+        }
+        h1 {
+            margin-top: 2em;
+        }
+        h2 {
+            border: 2px solid black;
+            text-align: right;
+            padding: 0.5em;
+            width: 20em;
+            height: 1em;
+        }
+        #number-operation {
+            display: grid;
+            grid-template: 1fr / 1fr 1fr;
+            grid-gap: 7%;
+        }
+        #number,#operation {
+            display: grid;
+            grid-template: 2em 2em 2em 2em / 1fr 1fr 1fr;
+            grid-gap: 5%;
+        }
+        .bigbutton {
+            grid-column: span 2;
+        }
+        .result-margin {
+            margin-left: 1em;
+        }
+    </style>
+    <title>Calculatrice</title>
+    <script>
+        let operands = {
+            first : 0,
+            second : 0,
+            selected : "first"
+        }
+        let calculus = {
+            operation : "",
+            result : 0
+        }
+        let result = 0;
+        function setoperand(digit) {
+            if (operands.selected == "first" ) {
+                operands.first = operands.first *10 + digit;
+                document.getElementById("output").innerText = operands.first;
+            } else {
+                operands.second = operands.second *10 + digit;
+                document.getElementById("output").innerText = operands.second;
+            }
+        }
+        function setoperation(operation) {
+            calculus.operation = operation;
+            if (operands.selected == "first") {
+                operands.selected = "second";
+            } else {
+                window.alert("Click on equal");
+            }
+        }
+        function executesingleoperation(operation) {
+            switch (operation) {
+                case "x!":
+                    if (operands.selected == "first") {
+                        selectedoperand = operands.first;
+                        if (operands.first<0) {
+                            window.alert("negative number are not supported!")
+                        } else {
+                            calculus.result = 1;
+                            for (let index = 1 ; index <= operands.first; index++) {
+                                calculus.result *= index; 
+                            }
+                            document.getElementById("output").innerText = calculus.result;
+                            sethistory(selectedoperand + " ! " + " = " + calculus.result);
+                        }
+                    } else {
+                        selectedoperand = operands.second;
+                    }
+                    break;
+                case "++":
+                    if (operands.selected == "first") {
+                        calculus.result = operands.first+1;
+                        document.getElementById("output").innerText = calculus.result;
+                        sethistory(operands.first + " + 1 = " + calculus.result);
+                        operands.first = calculus.result;
+                    } else {
+                        calculus.result = operands.second+1;
+                        document.getElementById("output").innerText = calculus.result;
+                        sethistory(operands.second + " + 1 = " + calculus.result);
+                        operands.second = calculus.result;
+                    }
+                    break;
+                case "--":
+                    if (operands.selected == "first") {
+                        calculus.result = operands.first-1;
+                        document.getElementById("output").innerText = calculus.result;
+                        sethistory(operands.first + " - 1 = " + calculus.result);
+                        operands.first = calculus.result;
+                    } else {
+                        calculus.result = operands.second-1;
+                        document.getElementById("output").innerText = calculus.result;
+                        sethistory(operands.second + " - 1 = " + calculus.result);
+                        operands.second = calculus.result;
+                    }
+                    break;
+                case "+/-":
+                    if (operands.selected == "first") {
+                        calculus.result = operands.first * -1;
+                        document.getElementById("output").innerText = calculus.result;
+                        sethistory( "-" + operands.first + " = " + calculus.result);
+                        operands.first = calculus.result;
+                    } else {
+                        calculus.result = operands.second * -1;
+                        document.getElementById("output").innerText = calculus.result;
+                        sethistory( "-" + operands.second + " = " + calculus.result);
+                        operands.second = calculus.result;
+                    }
+                    break;
+                default:
+                    window.alert("The operation was not set properly : use \n x! : for factorial\n  : for division");
+                    break;
+            }
+        }
+        function execute() {
+            let selectedoperand = 0;
+            switch (calculus.operation) {
+                case "-":
+                    calculus.result = operands.first - operands.second;
+                    // document.getElementById("output").innerText = calculus.result;
+                    sethistory(operands.first + " - " + operands.second + " = " + calculus.result);
+                    clearoperand();
+                    break;
+                case "+":
+                    calculus.result = operands.first + operands.second;
+                    // document.getElementById("output").innerText = calculus.result;
+                    sethistory(operands.first + " + " + operands.second + " = " + calculus.result);
+                    clearoperand();
+                    break;
+                case "/":
+                    if (operands.second == 0) {
+                        window.alert("Cannot devide by zero");
+                    } else {
+                        calculus.result = operands.first / operands.second;
+                        document.getElementById("output").innerText = calculus.result;
+                        sethistory(operands.first + " / " + operands.second + " = " + calculus.result);
+                    }
+                    clearoperand();
+                    break;
+                case "*":
+                    calculus.result = operands.first * operands.second;
+                    document.getElementById("output").innerText = calculus.result;
+                    sethistory(operands.first + " * " + operands.second + " = " + calculus.result);
+                    clearoperand();
+                    break;
+                case "%":
+                    calculus.result = operands.first % operands.second;
+                    document.getElementById("output").innerText = calculus.result;
+                    sethistory(operands.first + " % " + operands.second + " = " + calculus.result);
+                    clearoperand();
+                    break;
+                case "xy":
+                    calculus.result = operands.first ** operands.second;
+                    document.getElementById("output").innerText = calculus.result;
+                    sethistory(operands.first + " <sup>" + operands.second + "</sup>" + " = " + calculus.result);
+                    clearoperand();
+                    break;
+                default:
+                    window.alert("The operation was not set properly : use \n / : for division\n  : for division");
+                    break;
+            }
+        }
+        function clearoperand() {
+            operands.selected = "first";
+            operands.first = 0;
+            operands.second = 0;
+            calculus.operation = "";
+            
+        }
+        function sethistory(calculation) {
+            document.getElementById("history").innerHTML+="<li><span class='result-margin'>"+calculation+"</span></li>";
+        }
+    </script>
+
+</head>
+<body>
+    <h1>The Simple calculator</h1>
+    <h2 id="output"></h2>
+    <div id="number-operation">
+        <div id="number">
+            <button onclick="setoperand(9)">9</button>
+            <button onclick="setoperand(8)">8</button>
+            <button class="7" onclick="setoperand(7)">7</button>
+            <button name="six" onclick="setoperand(6)">6</button>
+            <button id="5" onclick="setoperand(5)">5</button>
+            <button onclick="setoperand(4)">4</button>
+            <button class="three"onclick="setoperand(3)">3</button>
+            <button name="2" onclick="setoperand(2)">2</button>
+            <button id="zero" onclick="setoperand(1)">1</button>
+            <button onclick="setoperand(0)">0</button>
+            <button class="bigbutton" onclick="clearoperand();document.getElementById('output').innerText = ''">C</button>
+        </div>
+        <div id="operation">
+            <button id="minus" onclick="setoperation('-')">-</button>
+            <button name="+" onclick="setoperation('+')">+</button>
+            <button class="divide" onclick="setoperation('/')">/</button>
+            <button onclick="setoperation('*')">*</button>
+            <button id="%" onclick="setoperation('%')">%</button>
+            <button name="exponent" onclick="setoperation('xy')"><i>x</i><sup>y</sup></button>
+            <button class="!" onclick="executesingleoperation('x!')">x!</button>
+            <button onclick="executesingleoperation('++')">++</button>
+            <button onclick="executesingleoperation('--')">- -</button>
+            <button onclick="executesingleoperation('+/-')">+/-</button>
+            <button class="bigbutton" onclick="execute()">=</button>
+        </div>
+    </div>
+
+    <h1>History</h1>
+    <ol id="history"></ol>
+
+    <script>
+        // setoperand(6);setoperation("/");setoperand(3);execute();
+        // setoperand(2);setoperation("*");setoperand(1);setoperand(2);execute();
+        // setoperand(5);setoperand(2);setoperation("-");setoperand(1);setoperand(2);execute();
+        // setoperand(4);setoperand(3);setoperation("+");setoperand(7);setoperand(1);setoperand(9);execute();
+        // setoperand(7);setoperand(5);setoperand(1);setoperation("%");setoperand(7);execute();
+        // setoperand(9);setoperation("xy");setoperand(3);execute();
+        // setoperand(4);executesingleoperation("x!");
+        // setoperand(8);setoperand(7);executesingleoperation("++");clearoperand();
+        // setoperand(6);setoperand(0);setoperand(0);executesingleoperation("--");clearoperand();
+        // setoperand(7);executesingleoperation("+/-");clearoperand();
+        // setoperand(7);setoperand(0);setoperand(0);executesingleoperation("-+");
+    </script>
+</html>
