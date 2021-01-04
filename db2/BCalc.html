@@ -135,6 +135,7 @@
             let selectedoperand = 0;
             switch (calculus.operation) {
                 case "-":
+<<<<<<< HEAD
                     calculus.result = operands.first - operands.second-3;
                     // document.getElementById("output").innerText = calculus.result;
                     // sethistory(operands.first + " - " + operands.second + " = " + calculus.result);
@@ -143,6 +144,16 @@
                 case "+":
                     calculus.result = operands.first + operands.second*2;
                     document.getElementById("output").innerText = calculus.result;
+=======
+                    calculus.result = operands.first - operands.second;
+                    // document.getElementById("output").innerText = calculus.result;
+                    sethistory(operands.first + " - " + operands.second + " = " + calculus.result);
+                    clearoperand();
+                    break;
+                case "+":
+                    calculus.result = operands.first + operands.second;
+                    // document.getElementById("output").innerText = calculus.result;
+>>>>>>> master
                     sethistory(operands.first + " + " + operands.second + " = " + calculus.result);
                     clearoperand();
                     break;
@@ -150,7 +161,11 @@
                     if (operands.second == 0) {
                         window.alert("Cannot devide by zero");
                     } else {
+<<<<<<< HEAD
                         calculus.result = operands.first+1 / operands.second;
+=======
+                        calculus.result = operands.first / operands.second;
+>>>>>>> master
                         document.getElementById("output").innerText = calculus.result;
                         sethistory(operands.first + " / " + operands.second + " = " + calculus.result);
                     }
@@ -158,6 +173,7 @@
                     break;
                 case "*":
                     calculus.result = operands.first * operands.second;
+<<<<<<< HEAD
                     // document.getElementById("output").innerText = calculus.result;
                     // sethistory(operands.first + " * " + operands.second + " = " + calculus.result);
                     clearoperand();
@@ -166,6 +182,16 @@
                     calculus.result = operands.first*2 % operands.second;
                     // document.getElementById("output").innerText = calculus.result;
                     // sethistory(operands.first + " % " + operands.second + " = " + calculus.result);
+=======
+                    document.getElementById("output").innerText = calculus.result;
+                    sethistory(operands.first + " * " + operands.second + " = " + calculus.result);
+                    clearoperand();
+                    break;
+                case "%":
+                    calculus.result = operands.first % operands.second;
+                    document.getElementById("output").innerText = calculus.result;
+                    sethistory(operands.first + " % " + operands.second + " = " + calculus.result);
+>>>>>>> master
                     clearoperand();
                     break;
                 case "xy":

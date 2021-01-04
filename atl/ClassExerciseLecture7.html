@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 4</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package calculator;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Application {
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lloyd\\Documents\\Automated\\chromedriver.exe");
+		// open the browser
+		WebDriver driver = new ChromeDriver();
+		// navigate the website https://lloydteacher.github.io/atl/BCalc.html
+		// driver.get("https://lloydteacher.github.io/atl/BCalc.html");
+
+		// navigate the website https://lloydteacher.github.io/db2/Calc.html
+		driver.get("https://lloydteacher.github.io/atl/Calc.html");
+
+		// Test case id : 1
+		// Summary : 5+5=10
+		// Steps
+		// Click on button 5
+		By fiveButtonLocator = By.id("5");
+		WebElement Button5 = driver.findElement(fiveButtonLocator);
+		Button5.click();
+		// Click on button +
+		WebElement ButtonPlus = driver.findElement(By.name("+"));
+		ButtonPlus.click();
+		// Click on button 5 again
+		Button5.click();
+		// Click on button =
+		WebElement ButtonEqual = driver.findElement(By.xpath("//*[@id=\"operation\"]/button[11]"));
+		ButtonEqual.click();
+		// Verify that the result is 10
+		// get the output result
+		WebElement output = driver.findElement(By.id("output"));
+		String actualvalue = output.getText();
+		System.out.println(actualvalue);
+		// compare the result with the value 10
+		if (actualvalue.contentEquals("10")) {
+			System.out.println("Test is passed");
+		} else {
+			System.out.println("Test is failed");
+		}
+
+		// Test case id : 2
+		// summary : 2*7=14
+		// Click on the button 2
+		By TowButtonLocator = By.name("2");
+		WebElement Button2 = driver.findElement(TowButtonLocator);
+		Button2.click();
+
+		// Click on the button *
+		By MutiplyButtonLocator = By.xpath("//*[@id=\"operation\"]/button[4]");
+		WebElement ButtonMultiply = driver.findElement(MutiplyButtonLocator);
+		ButtonMultiply.click();
+
+		// Click on the button 7
+		By sevenButtonLocator = By.className("7");
+		WebElement Button7 = driver.findElement(sevenButtonLocator);
+		Button7.click();
+
+		// Click on the button =
+		ButtonEqual.click();
+
+		// verify that the result value is 14
+		// get the output result
+		actualvalue = output.getText();
+		System.out.println(actualvalue);
+
+		// compare the result with the value 14
+		if (actualvalue.contentEquals("14")) {
+			System.out.println("Test is passed");
+		} else {
+			System.out.println("Test is failed");
+		}
+
+		// summary : 1-2=-1
+		// summary : 4/2=2
+		// summary : 5%6=5
+
+		// close the browser
+		driver.close();
+	}
+
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
