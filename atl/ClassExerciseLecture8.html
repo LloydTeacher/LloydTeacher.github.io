@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 4</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package evermore;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class App {
+	// Test Suite : verify that we can buy
+	// the album evemore on amazon.ca
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lloyd\\Documents\\Automated\\chromedriver.exe");
+		// open the browser
+		WebDriver driver = new ChromeDriver();
+		
+		// Test case 1 : Navigate to amazon
+		// home page
+		// step : navigate the website https://www.amazon.ca/
+		driver.get("https://www.amazon.ca/");
+		
+		// Test case 2 : Search for evermore
+		// search page
+		// step : write evermore in the search box
+		// step : click on the search button
+		By SearchboxLocator = By.id("twotabsearchtextbox");
+		WebElement Searchbox = driver.findElement(SearchboxLocator);
+		Searchbox.sendKeys("evermore");
+		Searchbox.submit();
+		//driver.findElement(By.id("nav-search-submit-button")).click();
+		
+		// Test case 3 : Click on the album evermore
+		// album page
+		// step : click on the first element
+        By AlbumImageLocator = By.xpath("//*[@id=\"search\"]/div[1]/div[2]/div/span[3]/div[2]/div[2]/div/span/div/div/span/a/div/img");
+		WebElement AlbumImage = driver.findElement(AlbumImageLocator);
+        AlbumImage.click();
+		
+		// Test case 4 : Click on add to cart
+		// cart page
+		// step : click on the button add to cart
+        By addToCartButtonLocator = By.name("submit.add-to-cart");
+		WebElement addToCartButton = driver.findElement(By.name("submit.add-to-cart"));
+        addToCartButton.click();
+		
+		// verify Text
+		String actualvalue = driver.findElement(By.xpath("//*[@id=\"hlb-subcart\"]/div[1]/span/span[1]/b")).getText();
+		if(actualvalue.contentEquals("Cart subtotal")) {
+			System.out.println("test is pass");
+		}else {
+			System.err.println("Test is failed");
+		}
+		
+        // Close the browser
+		driver.quit();
+		
+	}
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
