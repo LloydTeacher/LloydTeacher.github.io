@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 9</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-html">
+&lthtml&gt
+&lthead&gt
+    &lttitle&gtMy alert&lt/title&gt
+&lt/head&gt
+&ltbody&gt
+    &lth1&gtAn alert&lt/h1&gt
+    &ltbutton onclick="window.alert('testing')" &gtShow Alert&lt/button&gt
+    &ltbr&gt
+    &ltbr&gt
+    &ltbutton id="okcancel" onclick="window.confirm('test 2')" &gtShow yes no&lt/button&gt
+    &ltbr&gt
+    &ltbr&gt
+    &ltbutton id="mytext" onclick="window.prompt('Write your name')" &gtShow prompt message&lt/button&gt
+&lt/body&gt
+&lt/html&gt
+                </code></pre>
+            </div>
+        </div>
+        <h1 class="mx-auto h1" style="width: 23em;">Output of the html code</h1>
+        <div style="border: 3px solid black; padding: 2em;">
+            <h1>An alert</h1>
+<button onclick="window.alert('testing')" >Show Alert</button>
+<br>
+<br>
+<button id="okcancel" onclick="window.confirm('test 2')" >Show yes no</button>
+<br>
+<br>
+<button id="mytext" onclick="window.prompt('Write your name')" >Show prompt message</button>
+
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+

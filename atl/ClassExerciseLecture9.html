@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 9</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package alertbox;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Application {
+
+	public static void main(String[] args) {
+		// indicate the path of chrome connector
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lloyd\\Documents\\Automated\\chromedriver.exe");
+		// launch google chrome
+		ChromeDriver driver = new ChromeDriver();
+		// Use selenium to navigate to the webpage
+		// http://localhost/Automated/alertbox.html
+		driver.get("http://localhost/Automated/alertbox.html");
+		// find the button
+		By buttonLocator = By.tagName("button");
+		WebElement button = driver.findElement(buttonLocator);
+		
+		// click on the button
+		button.click();
+		
+		// Find the alter box
+		Alert alertwindow = driver.switchTo().alert();
+		
+		// Capture the text inside alert box
+		String actualtext = alertwindow.getText();
+		
+		// Display the text in the console
+		System.out.println(actualtext);
+		
+		// click on ok button
+		alertwindow.accept();
+		
+		// Find the button show yes no
+		By yesNoLocator = By.id("okcancel");
+		WebElement yesNoButton = driver.findElement(yesNoLocator);
+		
+		// click on the button show yes no
+		yesNoButton.click();
+		
+		// Find the alter box
+		alertwindow = driver.switchTo().alert();
+		
+		// click on cancel button
+		alertwindow.dismiss();
+		
+	}
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
