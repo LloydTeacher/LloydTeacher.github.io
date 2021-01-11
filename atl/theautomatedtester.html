@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 4</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package quiz;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Chapters 
+{
+    public static void main( String[] args )
+    {
+	    System.setProperty("webdriver.chrome.driver","D:\\chromedriver_win32\\chromedriver.exe");
+		
+    	// Explain the execution of this line :
+    	WebDriver driver = new ChromeDriver();
+	
+        // Explain the execution of this line :
+    	String baseUrl = "http://book.theautomatedtester.co.uk/";
+        driver.get(baseUrl);
+
+        // Explain the execution of this line :
+	    String actualText = driver.getTitle();
+	   
+       // Explain the execution of this line :
+	   System.out.println(actualText);
+
+       // Explain the execution of those lines:
+        By Chapter1Locator = By.linkText("Chapter1");
+        WebElement Chapter1 = driver.findElement(Chapter1Locator);
+
+       // Explain the execution of those lines:
+        Chapter1.click();
+        
+        // Explain the execution of this line :
+        driver.close();
+	}
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
