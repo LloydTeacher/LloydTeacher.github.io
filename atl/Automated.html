@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>MidTerm</title>
+    <link rel="stylesheet" href="..\bootstrap.min.css">
+</head>
+<body class="container">
+    <form style="width: 500px;" action="" class="mx-auto">
+        <h1 class="my-5 text-center">Automated</h1>
+        <h4 class="my-3">Username</h4>
+        <input type="text" name="fullname" id="username" class="my-3" style="width: 100%;">
+        <span>Stay signin</span>
+        <input class="mx-2" type="checkbox" name="stay" id="logged">
+        <button class="row my-3 ml-1 btn btn-outline-dark" style="width: 100%;" onclick="login()">login</button>
+        <a class="my-3" href="https://LloydTeacher.github.io/atl/Registered.html"> <u>Register</u></a>
+    </form>
+    <script>
+        function login() {
+            let user = document.getElementById("username").value;
+            if (user.trim().length > 0) {
+                window.confirm("Welcome "+user);
+                document.write("<h1 style='text-align: center;margin: 2em;'>Hi "+ user + ", you are Signin</h1>");
+            }
+        }
+    </script>
+    
+</body>
+</html>
