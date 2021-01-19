@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 13</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package movies;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Application {
+	public static void main(String[] args) {
+
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lloyd\\Documents\\Automated\\chromedriver.exe");
+		// open the browser
+		WebDriver driver = new ChromeDriver();
+		// navigate to movies
+		driver.get("http://127.0.0.1/Automated/movies.html");
+		
+		driver.findElement(By.xpath("/html/body/form/input[1]")).sendKeys("shaktiman");
+		
+		WebElement action = driver.findElement(By.id("action"));
+		action.click();
+		
+		WebElement serie = driver.findElement(By.name("serie"));
+		serie.click();
+		
+		// verify that radio button action is selected
+		if(action.isSelected()) {
+			System.out.println("radio button action is selected");
+		}else {
+			System.err.println("radio button action is not selected");
+		}
+		
+		WebElement drama = driver.findElement(By.id("drama"));
+
+		// verify that radio button drama is selected
+		if(drama.isSelected()) {
+			System.out.println("radio button drama is selected");
+		}else {
+			System.err.println("radio button drama is not selected");
+		}
+		
+		// verify that radio button drama is enable
+		if(drama.isEnabled()) {
+			System.out.println("radio button drama is Enabled");
+		}else {
+			System.err.println("radio button drama is not Enabled");
+		}
+		
+		// verify that radio button drama is Displayed
+		if(drama.isDisplayed()) {
+			System.out.println("radio button drama is Displayed");
+		}else {
+			System.err.println("radio button drama is not Displayed");
+		}
+		
+		// verify that the checkbox serie is selected
+		if(serie.isSelected()) {
+			System.out.println("checkbox serie is selected");
+		}else {
+			System.err.println("checkbox serie is not selected");
+		}
+		
+		// verify that the checkbox serie is displayed
+		if (serie.isDisplayed()) {
+			System.out.println("checkbox serie is Displayed");
+		}else {
+			System.err.println("checkbox serie is not Displayed");
+		}
+		
+		WebElement bollywood = driver.findElement(By.name("bollywood"));
+
+		// verify that the checkbox bollywood is selected
+		if(bollywood.isSelected()) {
+			System.out.println("checkbox bollywood is selected");
+		}else {
+			System.err.println("checkbox bollywood is not selected");
+		}
+
+		driver.close();
+	}
+}
+
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
