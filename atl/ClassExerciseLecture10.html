@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 10</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+// file :  Game
+package cricket;
+
+public class Game {
+	// properties
+	String HomeTeam;
+	String AwayTeam;
+	int run;
+	int wickets;
+	double overs;
+	
+	// method
+	void displayResult() {
+		System.out.println(
+	HomeTeam + " vs " + AwayTeam + " : " + run + " (" + wickets+ " wkts, "+ overs + " Ov)");
+		
+	}
+	
+	// constructor
+	Game(){
+		System.out.println("constructor");
+		HomeTeam = "Australia";
+		System.out.println(HomeTeam);
+		run = 338;
+		System.out.println(run);
+	}
+	
+	Game(String initialHomeTeam, String initialAwayTeam, 
+			int initialRun, int initialWickets, double initialOvers){
+		HomeTeam = initialHomeTeam;
+		AwayTeam = initialAwayTeam;
+		run = initialRun;
+		wickets = initialWickets;
+		overs = initialOvers;
+	}
+}
+
+// file :  Application
+package cricket;
+
+public class Application {
+	
+	public static void main(String[] args) {
+		// instantiation
+		Game FirstInnings = new Game("Australia", "India", 338,10, 105.4);
+		// Australia vs India : 338 (10 wkts, 105.4 Ov)
+		// call method
+		FirstInnings.displayResult();
+		
+		Game SecondInnings = new Game("India", "Australia", 244, 10, 100.4);
+		// India vs  Australia : 244 (10 wkts, 100.4 Ov)
+		// display a variable content
+		//System.out.println(MySecondObject.HomeTeam);
+		// call a method
+		SecondInnings.displayResult();
+		
+		System.out.println(FirstInnings.run-SecondInnings.run);
+		
+	}
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+

@@ -1,0 +1,97 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 13</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-html">
+&lthtml&gt
+&lthead&gt
+&lttitle&gtMovies&lt/title&gt
+&lt/head&gt
+&ltbody style="margin: 0 20% 0 30%;font-size:2em;"&gt
+&lth1&gtMovie library&lt/h1&gt
+&ltform&gt
+&lth3 style="margin:20px"&gtWrite your show&lt/h3&gt
+&ltinput type="text" style="width:100%;height:3em;" required&gt
+&lth3&gtGenre&lt/h3&gt
+&ltinput type="radio" id="action" name="genre" value="action"&gt &ltlabel&gtaction&ltlabel&gt
+&ltinput type="radio" style="display:inline" id="drama" name="genre" value="drama"&gt &ltlabel&gtdrama&ltlabel&gt
+&lth3&gtType&lt/h3&gt
+&ltinput type="checkbox" name="bollywood" value="bollywood" &gt &ltlabel&gtbollywood&ltlabel&gt
+&ltbr&gt
+&ltinput type="checkbox" name="serie"  value="serie"&gt &ltlabel&gtserie&ltlabel&gt
+&ltbr&gt
+&ltbr&gt
+&ltbutton  style="width:100%;height:3em;" onclick="addMovie()"&gtAdd&lt/button&gt
+&ltform&gt
+&ltp&gtList&ltp&gt
+&ltul&gt&ltul&gt
+&ltscript&gt
+function addMovie(){
+	let elements = document.querySelectorAll("input");
+	let display = "";
+	elements.forEach( item=&gt {  
+		if(item.checked){
+			display += item.value +", ";
+		}
+	});
+	if(display.length){
+		if(elements[0].value.length){
+			display = elements[0].value + " - " + display.replace(/,\s+$/gm,"");
+		}else{
+			display = display.replace(/,\s+$/gm,"");
+		}
+	}else{
+		display = elements[0].value;
+	}
+
+	if(display.length){
+		let unorderlist = document.querySelector("ul");
+		let li = document.createElement('li');
+		li.textContent = display;
+		unorderlist.appendChild(li);
+	}
+}
+&lt/script&gt
+&lt/body&gt
+&lt/html&gt
+                </code></pre>
+            </div>
+        </div>
+        <h1 class="mx-auto h1" style="width: 23em;">Output of the html code</h1>
+        <div style="border: 3px solid black; padding: 2em;">
+            <h1>An alert</h1>
+<button onclick="window.alert('testing')" >Show Alert</button>
+<br>
+<br>
+<button id="okcancel" onclick="window.confirm('test 2')" >Show yes no</button>
+<br>
+<br>
+<button id="mytext" onclick="window.prompt('Write your name')" >Show prompt message</button>
+
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+

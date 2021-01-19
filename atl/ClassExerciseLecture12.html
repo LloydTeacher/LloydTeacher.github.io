@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 12</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package simplelambo;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Application {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lloyd\\Documents\\Automated\\chromedriver.exe");
+		// open the browser
+		WebDriver driver = new ChromeDriver();
+		// navigate to autotrader
+		driver.get("https://www.autotrader.ca");
+		
+		// find the make dropdown
+		By SelectBoxLocator = By.id("rfMakes");
+		WebElement SelectBox = driver.findElement(SelectBoxLocator);
+		
+		// select Lamborghini in the make dropdown
+		Select dropdown = new Select(SelectBox);
+		dropdown.selectByValue("Lamborghini");
+		
+		// implicit wait
+		// waiting for a web page to load
+		driver.manage().timeouts().implicitlyWait(4, TimeUnit.MINUTES);
+		
+		// explicit wait
+		// waiting for a element to be available
+		
+		// find the model dropdown
+		By SelectBox2Locator = By.id("rfModel");
+		WebElement SelectBox2 = driver.findElement(SelectBox2Locator);
+		
+		//select huracan in the model dropdown
+		Select listbox = new Select(SelectBox2);
+		listbox.selectByVisibleText("Huracan");
+		
+		// find textbox postal code 
+		By postalcodelocator = By.cssSelector("#locationAddress");
+		WebElement postalcode = driver.findElement(postalcodelocator);
+		// write postal code of matrix college
+		postalcode.sendKeys("H3H 1E3");
+		
+		// finding the link sear and click on it
+		By searchLocator = By.linkText("Search");
+		driver.findElement(searchLocator).click();
+		
+		// Capture the tile
+		String actualtext = driver.getTitle();
+		
+		// verify that the tile contain New & Used
+		if(actualtext.contains("New & Used")) {
+			System.out.println("Test is passed");
+		}else {
+			System.err.println("Test is failed");
+		}
+		
+		driver.quit();
+	}
+
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+

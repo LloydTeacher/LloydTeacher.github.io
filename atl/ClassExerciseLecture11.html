@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Class Exercise Lecture 10</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+// file :  ProductPage
+package weathershopper;
+
+import org.openqa.selenium.WebDriver;
+
+public class ProductPage {
+	
+	WebDriver driver;
+	
+	void verifyTitle() {
+		// capture the title
+		String actual = driver.getTitle();
+		
+		boolean verification = actual.contentEquals("Current Temperature");
+		
+		if (verification) {
+			System.out.println("pass");
+		}else {
+			System.out.println("fail");
+		}
+		
+	}
+	
+	ProductPage(WebDriver initialDriver){
+		driver = initialDriver;
+	}
+
+}
+
+// file :  HomePage
+package weathershopper;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+public class HomePage {
+	
+	WebDriver driver;
+
+	void navigate() {
+		driver.get("https://weathershopper.pythonanywhere.com/");
+	}
+	
+	void verifyTitle() {
+		// capture the title
+		String actual = driver.getTitle();
+		
+		boolean verification = actual.contentEquals("Current Temperature");
+		
+		if (verification) {
+			System.out.println("pass");
+		}else {
+			System.out.println("fail");
+		}
+		
+	}
+	
+	void clickbutton() {
+		// find the button
+		By buttonLocator = By.linkText("Buy sunscreens");
+		WebElement button = driver.findElement(buttonLocator);
+		
+		// click
+		button.click();	
+	}
+	
+	
+	HomePage(WebDriver initialDriver){
+		driver = initialDriver;
+	}
+}
+
+// file :  Application
+package weathershopper;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Application {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lloyd\\Documents\\Automated\\chromedriver.exe");
+		// open the browser
+		WebDriver driver = new ChromeDriver();
+		
+		// instantiate the class HomePage
+		HomePage object = new HomePage(driver);
+		object.navigate();
+		object.verifyTitle();
+		object.clickbutton();
+		
+		// instantiate the class ProductPage
+		ProductPage object2 = new ProductPage(driver);
+		object2.verifyTitle();
+		
+		
+	}
+}
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
