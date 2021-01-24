@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>TestNg Annotations list</title>
+
+        <link rel="stylesheet" href="..\bootstrap.min.css">
+        <link rel="stylesheet" href="..\reset.css">
+        <link rel="stylesheet" href="..\reveal.css">
+        <link rel="stylesheet" href="..\black.css" id="theme">
+
+        <!-- Theme used for syntax highlighted code -->
+        <link rel="stylesheet" href="..\monokai.css" id="highlight-theme">
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row" >
+                <pre style="font-size: 110%;" class="col-12"><code class="language-java">
+package testngannotation;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.AfterSuite;
+
+public class application {
+  @Test(priority = 1)
+  public void A() {
+	  System.out.println("@Test");
+  }
+  d
+  @Test(priority = 2)
+  public void B() {
+	  System.out.println("@Test");
+  }
+  
+  @Test(priority = 3)
+  public void C() {
+	  System.out.println("@Test");
+  }
+  
+  @BeforeMethod(enabled = false)
+  public void beforeMethod() {
+	  System.out.println("@BeforeMethod Start recording");
+  }
+
+  @AfterMethod(enabled = false)
+  public void afterMethod() {
+	  System.out.println("@AfterMethod End recoding");
+  }
+
+  @BeforeClass
+  public void beforeClass() {
+	  System.out.println("@BeforeClass");
+  }
+
+  @AfterClass
+  public void afterClass() {
+	  System.out.println("@AfterClass");
+  }
+
+  @BeforeTest
+  public void beforeTest() {
+	  System.out.println("@BeforeTest");
+  }
+
+  @AfterTest
+  public void afterTest() {
+	  System.out.println("@AfterTest");
+  }
+
+  @BeforeSuite
+  public void beforeSuite() {
+	  System.out.println("@BeforeSuite");
+  }
+
+  @AfterSuite
+  public void afterSuite() {
+	  System.out.println("@AfterSuite");
+  }
+
+}
+
+                </code></pre>
+            </div>
+        </div>
+
+        <script src="..\reveal.js"></script>
+        <script src="..\notes.js"></script>
+        <script src="..\markdown.js"></script>
+        <script src="..\highlight.js"></script>
+        <script >
+           RevealHighlight().hljs.initHighlightingOnLoad(); 
+        </script>
+    </body>
+</html>
+
