@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <title>Class Exercise Lecture 13</title>
+        <title>Add video WebPage</title>
 
         <link rel="stylesheet" href="..\bootstrap.min.css">
         <link rel="stylesheet" href="..\reset.css">
@@ -72,19 +72,50 @@ function addMovie(){
                 </code></pre>
             </div>
         </div>
-        <h1 class="mx-auto h1" style="width: 23em;">Output of the html code</h1>
-        <div style="border: 3px solid black; padding: 2em;">
-            <h1>An alert</h1>
-<button onclick="window.alert('testing')" >Show Alert</button>
+<h1>Movie library</h1>
+<form>
+<h3 style="margin:20px">Write your show</h3>
+<input type="text" style="width:100%;height:3em;" required>
+<h3>Genre</h3>
+<input type="radio" id="action" name="genre" value="action"> <label>action<label>
+<input type="radio" style="display:inline" id="drama" name="genre" value="drama"> <label>drama<label>
+<h3>Type</h3>
+<input type="checkbox" name="bollywood" value="bollywood" > <label>bollywood<label>
+<br>
+<input type="checkbox" name="serie"  value="serie"> <label>serie<label>
 <br>
 <br>
-<button id="okcancel" onclick="window.confirm('test 2')" >Show yes no</button>
-<br>
-<br>
-<button id="mytext" onclick="window.prompt('Write your name')" >Show prompt message</button>
+<button  style="width:100%;height:3em;" onclick="addMovie()">Add</button>
+<form>
+<p>List<p>
+<ul><ul>
+<script>
+function addMovie(){
+	let elements = document.querySelectorAll("input");
+	let display = "";
+	elements.forEach( item=> {  
+		if(item.checked){
+			display += item.value +", ";
+		}
+	});
+	if(display.length){
+		if(elements[0].value.length){
+			display = elements[0].value + " - " + display.replace(/,\s+$/gm,"");
+		}else{
+			display = display.replace(/,\s+$/gm,"");
+		}
+	}else{
+		display = elements[0].value;
+	}
 
-        </div>
-
+	if(display.length){
+		let unorderlist = document.querySelector("ul");
+		let li = document.createElement('li');
+		li.textContent = display;
+		unorderlist.appendChild(li);
+	}
+}
+</script>
         <script src="..\reveal.js"></script>
         <script src="..\notes.js"></script>
         <script src="..\markdown.js"></script>
